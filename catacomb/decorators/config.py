@@ -1,7 +1,7 @@
 import os
 
-from catacomb.constants.messages import Messages
-from catacomb.settings import Settings
+from catacomb import settings
+from catacomb.constants import messages
 
 from pathlib import Path
 
@@ -12,12 +12,12 @@ class Config(object):
     the Catacomb CLI.
 
     Attributes:
-        catacomb_config (str): Path to the users catacomb configuration file.
+        catacomb_path (str): Path to the users catacomb configuration file.
     """
 
     def __init__(self):
-        self.catacomb_config = '{0}/{1}'.format(
-                str(Path.home()), Settings.CATACOMB_FILE_NAME)
+        self.catacomb_path = '{0}/{1}'.format(
+                str(Path.home()), settings.CATACOMB_FILE_NAME)
         self._init_catacomb()
 
     def _init_catacomb(self):
@@ -25,7 +25,7 @@ class Config(object):
         directory. The hidden file will be used for catacomb user specific
         settings, and storage of user commands.
         """
-        if not os.path.isfile(self.catacomb_config):
+        if not os.path.isfile(self.catacomb_path):
             # If a catacomb doesn't exist, we create one.
-            with open(self.catacomb_config, 'w') as catacomb:
-                catacomb.write(Messages.CATACOMB_HEADER)
+            with open(self.catacomb_path, 'w') as catacomb:
+                catacomb.write('{\n}')

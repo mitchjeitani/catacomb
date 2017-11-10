@@ -1,9 +1,7 @@
-class Settings:
-    """Application settings.
-    """
+# Name of the user configuration file.
+CATACOMB_FILE_NAME = '.catacomb_config'
 
-    CATACOMB_FILE_NAME = '.catacomb_config'
-
-    CONTEXT_SETTINGS = {
-        'help_option_names': ['-h', '--help']
-    }
+# Settings to override on the context object.
+CONTEXT_SETTINGS = {
+    'help_option_names': ['-h', '--help']
+}
