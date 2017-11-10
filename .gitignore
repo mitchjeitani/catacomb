@@ -1,4 +1,7 @@
-# Mac OSX
+# Makefile
+Makefile
+
+# Mac OS
 .DS_Store
 
 # Byte-compiled / optimized / DLL files
