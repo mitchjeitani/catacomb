@@ -4,8 +4,17 @@ class Add:
 
     NAME = 'add'
     DESCRIPTION = 'Stores a new command in the tomb.'
-    SUCCESS = ("* Successfully added the command with alias '{0}', and "
-               "description '{1}'.")
+    SUCCESS = ("Successfully added the command with alias '{0}', and "
+               "description '{1}' to the tomb.")
+
+
+class Clean:
+    """Attributes for the clean command: `tomb clean`.
+    """
+
+    NAME = 'clean'
+    DESCRIPTION = 'Empties the contents of a tomb.'
+    SUCCESS = 'The contents of the tomb have been cleared.'
 
 
 class Grab:
@@ -30,3 +39,5 @@ class Remove:
 
     NAME = 'rm'
     DESCRIPTION = 'Removes a command from the tomb.'
+    SUCCESS = ("Successfully removed the command with alias '{0}' from the "
+               "tomb.")

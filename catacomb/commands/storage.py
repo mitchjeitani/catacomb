@@ -1,7 +1,7 @@
 import click
 
-from catacomb.constants import commands, common, limits
-from catacomb.utils import file_handler, formatter
+from catacomb.constants import commands, common, errors, limits
+from catacomb.utils import tomb_handler, formatter
 
 
 @click.command(commands.Add.NAME, help=commands.Add.DESCRIPTION)
@@ -20,8 +20,27 @@ def add(ctx, command):
     description = click.prompt('Description')
 
     # Save the command to the current tomb.
-    file_handler.add_command(ctx, command, alias, description)
+    tomb_handler.add_command(ctx, command, alias, description)
     formatter.print_success(commands.Add.SUCCESS.format(alias, description))
+
+
+@click.command(commands.Clean.NAME, help=commands.Clean.DESCRIPTION)
+@click.pass_context
+def clean(ctx):
+    """First prompts the user to confirm cleaning of the current tomb. If
+    the user confirms the action, the tomb will be cleared, reset to it's
+    original (empty) state.
+
+    Arguments:
+        ctx (click.Context): Holds the state relevant for script execution.
+    """
+    # Prompt the user for command details.
+    confirm = click.prompt(common.CLEAN_PROMPT)
+
+    if confirm.lower() == 'y':
+        tomb_handler.clean_tomb(ctx)
+    else:
+        formatter.print_error(errors.ACTION_ABORTED)
 
 
 @click.command(commands.Grab.NAME, help=commands.Grab.DESCRIPTION)
@@ -45,8 +64,7 @@ def list(ctx):
     Arguments:
         ctx (click.Context): Holds the state relevant for script execution.
     """
-    tomb_data = file_handler.read_tomb(ctx)
-    click.echo(formatter.tomb_to_table(tomb_data))
+    click.echo(tomb_handler.tomb_to_table(ctx))
 
 
 @click.command(commands.Remove.NAME, help=commands.Remove.DESCRIPTION)
@@ -59,4 +77,4 @@ def remove(ctx, alias):
         ctx (click.Context): Holds the state relevant for script execution.
         alias (str): The alias of the command to remove.
     """
-    click.echo('Removing: {0}'.format(alias))
+    tomb_handler.remove_command(ctx, alias)

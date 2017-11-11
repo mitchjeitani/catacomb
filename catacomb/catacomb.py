@@ -17,6 +17,7 @@ def tomb(ctx):
 
 # Register sub commands to the `tomb` group.
 tomb.add_command(storage.add)
+tomb.add_command(storage.clean)
 tomb.add_command(storage.grab)
 tomb.add_command(storage.list)
 tomb.add_command(storage.remove)

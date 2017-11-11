@@ -26,22 +26,22 @@ def color_text(text, color):
     return text
 
 
-def tomb_to_table(tomb_data):
-    """Converts information stored in a tomb to a pretty table representation.
+def to_table(headers, rows):
+    """Produces a nicely formatted ASCII table from the provided data.
 
     Arguments:
-        tomb_data (dict): Contains commands with their various attributes,
-            e.g. alias, description and command.
+        headers (list): The headers of the table.
+        rows (list): List of rows to append to the table.
+
+    Returns:
+        A `string` representation of the table.
     """
-    table = [common.TABLE_HEADERS]
-    for alias in tomb_data.keys():
-        cmd = tomb_data[alias]['command']
-        desc = tomb_data[alias]['description']
-        table.append(_create_row(alias, cmd, desc))
+    table = [headers]
+    table.extend(rows)
     return AsciiTable(table).table
 
 
-def _create_row(alias, command, description):
+def create_row(alias, command, description):
     """Creats a new table row using the provided attributes for a specific
     command.
 
@@ -60,16 +60,13 @@ def _create_row(alias, command, description):
     ]
 
 
-def print_error(message, quit=False):
+def print_error(message):
     """Correctly styles and prints an error message to standard output.
 
     Arguments:
         message (str): An error message.
-        quit (bool): If True, stop program execution.
     """
     click.echo(color_text(message, 'red'), err=True)
-    if quit:
-        exit(1)
 
 
 def print_success(message):

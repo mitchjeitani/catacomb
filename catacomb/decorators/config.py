@@ -1,6 +1,7 @@
 import os
 
 from catacomb import settings
+from catacomb.constants import common
 
 from pathlib import Path
 
@@ -27,4 +28,4 @@ class Config(object):
         if not os.path.isfile(self.catacomb_path):
             # If a catacomb doesn't exist, we create one.
             with open(self.catacomb_path, 'w') as catacomb:
-                catacomb.write('{\n}')
+                catacomb.write(common.INITIAL_TOMB_STATE)
