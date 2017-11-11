@@ -1,7 +1,6 @@
 import os
 
 from catacomb import settings
-from catacomb.constants import messages
 
 from pathlib import Path
 

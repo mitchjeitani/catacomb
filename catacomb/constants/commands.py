@@ -4,6 +4,8 @@ class Add:
 
     NAME = 'add'
     DESCRIPTION = 'Stores a new command in the tomb.'
+    SUCCESS = ("* Successfully added the command with alias '{0}', and "
+               "description '{1}'.")
 
 
 class Grab:
@@ -12,6 +14,14 @@ class Grab:
 
     NAME = 'grab'
     DESCRIPTION = 'Grabs a command from the tomb and executes it.'
+
+
+class List:
+    """Attributes for the list command: `tomb list`.
+    """
+
+    NAME = 'list'
+    DESCRIPTION = 'Lists the commands currently stored in the tomb.'
 
 
 class Remove:

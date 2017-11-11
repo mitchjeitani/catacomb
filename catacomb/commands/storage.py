@@ -1,9 +1,7 @@
 import click
-import os
 
-from catacomb.constants import commands
-from catacomb.constants import messages
-from catacomb.utils import file_handler
+from catacomb.constants import commands, common, limits
+from catacomb.utils import file_handler, formatter
 
 
 @click.command(commands.Add.NAME, help=commands.Add.DESCRIPTION)
@@ -23,8 +21,7 @@ def add(ctx, command):
 
     # Save the command to the current tomb.
     file_handler.add_command(ctx, command, alias, description)
-
-    click.echo(messages.ADD_SUCCESS.format(alias, description))
+    formatter.print_success(commands.Add.SUCCESS.format(alias, description))
 
 
 @click.command(commands.Grab.NAME, help=commands.Grab.DESCRIPTION)
@@ -38,6 +35,18 @@ def grab(ctx, alias):
         alias (str): The alias of the command to execute.
     """
     click.echo('Executing: {0}'.format(alias))
+
+
+@click.command(commands.List.NAME, help=commands.List.DESCRIPTION)
+@click.pass_context
+def list(ctx):
+    """Lists all the commands in the current tomb.
+
+    Arguments:
+        ctx (click.Context): Holds the state relevant for script execution.
+    """
+    tomb_data = file_handler.read_tomb(ctx)
+    click.echo(formatter.tomb_to_table(tomb_data))
 
 
 @click.command(commands.Remove.NAME, help=commands.Remove.DESCRIPTION)
