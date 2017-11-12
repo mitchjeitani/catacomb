@@ -1,5 +1,6 @@
-# Name of the user configuration file.
-CATACOMB_FILE_NAME = '.catacomb_config'
+# Configuration naming.
+CATACOMB_DIR_NAME = '.catacomb'
+CATACOMB_CFG_NAME = '.catacomb_config'
 
 # Settings to override on the context object.
 CONTEXT_SETTINGS = {

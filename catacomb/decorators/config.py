@@ -16,16 +16,21 @@ class Config(object):
     """
 
     def __init__(self):
+        self.catacomb_dir = '{0}/{1}'.format(
+                str(Path.home()), settings.CATACOMB_DIR_NAME)
         self.catacomb_path = '{0}/{1}'.format(
-                str(Path.home()), settings.CATACOMB_FILE_NAME)
+                str(self.catacomb_dir), settings.CATACOMB_CFG_NAME)
         self._init_catacomb()
 
     def _init_catacomb(self):
-        """Initialises the Catacomb as a hidden file in the users home
-        directory. The hidden file will be used for catacomb user specific
-        settings, and storage of user commands.
+        """Initialises the users configuration for the application.
         """
+        if not os.path.exists(self.catacomb_dir):
+            # If the main directory doesn't exist, we'll need to create it.
+            os.makedirs(self.catacomb_dir)
+
         if not os.path.isfile(self.catacomb_path):
-            # If a catacomb doesn't exist, we create one.
+            # If a configuration file doesn't exist, we'll need to create that
+            # too.
             with open(self.catacomb_path, 'w') as catacomb:
                 catacomb.write(common.INITIAL_TOMB_STATE)
