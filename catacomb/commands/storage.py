@@ -4,7 +4,7 @@ from catacomb.constants import commands, common, errors, limits
 from catacomb.utils import tomb_handler, formatter
 
 
-@click.command(commands.Add.NAME, help=commands.Add.DESCRIPTION)
+@click.command(commands.Add.NAME, short_help=commands.Add.DESCRIPTION)
 @click.argument('command', nargs=1)
 @click.pass_context
 def add(ctx, command):
@@ -24,7 +24,7 @@ def add(ctx, command):
     formatter.print_success(commands.Add.SUCCESS.format(alias, description))
 
 
-@click.command(commands.Clean.NAME, help=commands.Clean.DESCRIPTION)
+@click.command(commands.Clean.NAME, short_help=commands.Clean.DESCRIPTION)
 @click.pass_context
 def clean(ctx):
     """First prompts the user to confirm cleaning of the current tomb. If
@@ -43,7 +43,7 @@ def clean(ctx):
         formatter.print_error(errors.ACTION_ABORTED)
 
 
-@click.command(commands.Grab.NAME, help=commands.Grab.DESCRIPTION)
+@click.command(commands.Grab.NAME, short_help=commands.Grab.DESCRIPTION)
 @click.argument('alias', nargs=1)
 @click.pass_context
 def grab(ctx, alias):
@@ -56,7 +56,7 @@ def grab(ctx, alias):
     click.echo('Executing: {0}'.format(alias))
 
 
-@click.command(commands.List.NAME, help=commands.List.DESCRIPTION)
+@click.command(commands.List.NAME, short_help=commands.List.DESCRIPTION)
 @click.pass_context
 def list(ctx):
     """Lists all the commands in the current tomb.
@@ -67,7 +67,7 @@ def list(ctx):
     click.echo(tomb_handler.tomb_to_table(ctx))
 
 
-@click.command(commands.Remove.NAME, help=commands.Remove.DESCRIPTION)
+@click.command(commands.Remove.NAME, short_help=commands.Remove.DESCRIPTION)
 @click.argument('alias', nargs=1)
 @click.pass_context
 def remove(ctx, alias):

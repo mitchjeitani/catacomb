@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import find_packages, setup
 
 setup(
     name = 'catacomb',
@@ -8,20 +8,18 @@ setup(
         'catacomb',
     ],
 
-    packages = [
-        'catacomb',
-        'catacomb.commands',
-        'catacomb.constants',
-    ],
+    packages = find_packages(),
 
     # Dependencies
     install_requires = [
         'click',
+        'terminaltables',
     ],
 
+    # Script execution
     entry_points = {
         'console_scripts': [
-            'tomb = catacomb.catacomb:tomb'
+            'tomb = catacomb.catacomb:tomb',
         ]
     },
 
