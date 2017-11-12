@@ -59,6 +59,23 @@ def add_command(ctx, command, alias, description):
     write_tomb(ctx, data)
 
 
+def get_command(ctx, alias):
+    """Retrieves a command from the current tomb, using its alias.
+
+    Arguments:
+        ctx (click.Context): Holds the state relevant for script execution.
+        alias (str): The alias to save the command as.
+
+    Returns:
+        The command as a `string`, or `None` if not found.
+    """
+    data = read_tomb(ctx)
+
+    if alias in data:
+        return data[alias]['command']
+    return None
+
+
 def remove_command(ctx, alias):
     """Removes a command from the current tomb.
 
