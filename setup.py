@@ -1,14 +1,21 @@
-from setuptools import find_packages, setup
+from catacomb import about
+from setuptools import setup
 
 setup(
     name = 'catacomb',
-    version = '0.1',
+    version = about.__version__,
 
     py_modules = [
         'catacomb',
     ],
 
-    packages = find_packages(),
+    packages = [
+        'catacomb',
+        'catacomb.commands',
+        'catacomb.constants',
+        'catacomb.decorators',
+        'catacomb.utils',
+    ],
 
     # Dependencies
     install_requires = [
@@ -28,6 +35,6 @@ setup(
     author_email = 'mitchelljeitani@hotmail.com',
     description = 'A minimalistic CLI tool for storing shell commands.',
     license = 'MIT',
-    keywords = 'command-line shell productivity',
+    keywords = 'command-line shell productivity storage',
     url = 'https://github.com/mitchjeitani/catacomb'
 )

@@ -7,10 +7,12 @@
 
 ### Setup
 
-This project is currently in development. To test it you can install it from the project directory with pip.
+Catacomb is available on PyPi, you can install it using pip.
 
-`pip install -e .`
+`pip install catacomb`
 
 ### Usage
 
-Type `tomb --help` or `tomb -h` for example usage.
+![Catacomb](./media/catacomb.gif)
+
+Use `tomb --help` for more information.
