@@ -7,7 +7,7 @@ from click.testing import CliRunner
 
 
 # Fixtures
-@pytest.fixture(scope='module', params=[['-h'], ['--help'], []])
+@pytest.fixture(scope="module", params=[["-h"], ["--help"], []])
 def flags(request):
     return request.param
 
@@ -23,6 +23,6 @@ class TestHelp(object):
         assert result.exit_code == 0
 
         # Correct help text.
-        assert 'Usage:' in result.output
-        assert 'Options:' in result.output
-        assert 'Commands:' in result.output
+        assert "Usage:" in result.output
+        assert "Options:" in result.output
+        assert "Commands:" in result.output

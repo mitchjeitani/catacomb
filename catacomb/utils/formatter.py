@@ -1,7 +1,7 @@
 import click
 import textwrap
 
-from catacomb.constants import common, errors, limits
+from catacomb.common import constants, errors
 
 from terminaltables import AsciiTable
 
@@ -54,9 +54,9 @@ def create_row(alias, command, description):
         A `list` representing the new row for a command.
     """
     return [
-        textwrap.fill(alias, limits.MAX_TABLE_WIDTH),
-        textwrap.fill(command, limits.MAX_TABLE_WIDTH),
-        textwrap.fill(description, limits.MAX_TABLE_WIDTH),
+        textwrap.fill(alias, constants.MAX_TABLE_WIDTH),
+        textwrap.fill(command, constants.MAX_TABLE_WIDTH),
+        textwrap.fill(description, constants.MAX_TABLE_WIDTH),
     ]
 
 
@@ -66,7 +66,7 @@ def print_error(message):
     Arguments:
         message (str): An error message.
     """
-    click.echo(color_text(message, 'red'), err=True)
+    click.echo(color_text(message, "red"), err=True)
 
 
 def print_success(message):
@@ -75,4 +75,4 @@ def print_success(message):
     Arguments:
         message (str): A success message.
     """
-    click.echo(color_text(message, 'green'))
+    click.echo(color_text(message, "green"))

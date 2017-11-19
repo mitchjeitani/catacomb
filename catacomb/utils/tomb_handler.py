@@ -1,6 +1,6 @@
 import json
 
-from catacomb.constants import commands, common, errors
+from catacomb.common import constants, errors
 from catacomb.utils import formatter
 
 
@@ -13,7 +13,7 @@ def read_tomb(ctx):
     Returns:
         A `dict` representing the contents of the tomb.
     """
-    with open(ctx.obj.catacomb_path, 'r') as f:
+    with open(ctx.obj.config_path, "r") as f:
         json_data = json.load(f)
     return json_data
 
@@ -25,7 +25,7 @@ def write_tomb(ctx, data):
         ctx (click.Context): Holds the state relevant for script execution.
         data (dict): The data to store in the tomb.
     """
-    with open(ctx.obj.catacomb_path, 'w') as f:
+    with open(ctx.obj.config_path, "w") as f:
         f.write(json.dumps(data, indent=2))
 
 
@@ -37,7 +37,6 @@ def clean_tomb(ctx):
         ctx (click.Context): Holds the state relevant for script execution.
     """
     write_tomb(ctx, {})
-    formatter.print_success(commands.Clean.SUCCESS)
 
 
 def add_command(ctx, command, alias, description):
@@ -52,8 +51,8 @@ def add_command(ctx, command, alias, description):
     data = read_tomb(ctx)
 
     data[alias] = {
-        'command': command,
-        'description': description
+        "command": command,
+        "description": description
     }
 
     write_tomb(ctx, data)
@@ -72,7 +71,7 @@ def get_command(ctx, alias):
     data = read_tomb(ctx)
 
     if alias in data:
-        return data[alias]['command']
+        return data[alias]["command"]
     return None
 
 
@@ -89,14 +88,12 @@ def remove_command(ctx, alias):
     data = read_tomb(ctx)
 
     if alias not in data:
-        formatter.print_error(errors.ALIAS_NOT_FOUND.format(alias))
         return False
 
     # Remove the command then write back to the file.
     del data[alias]
     write_tomb(ctx, data)
 
-    formatter.print_success(commands.Remove.SUCCESS.format(alias))
     return True
 
 
@@ -115,8 +112,8 @@ def tomb_to_table(ctx):
     # Convert each stored command to it's own row.
     rows = []
     for alias in data.keys():
-        cmd = data[alias]['command']
-        desc = data[alias]['description']
+        cmd = data[alias]["command"]
+        desc = data[alias]["description"]
         rows.append(formatter.create_row(alias, cmd, desc))
 
-    return formatter.to_table(common.TABLE_HEADERS, rows)
+    return formatter.to_table(constants.TABLE_HEADERS, rows)
