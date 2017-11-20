@@ -1,8 +1,10 @@
 # User prompts.
-PROMPT_ALIAS = "Alias"
+PROMPT_CMD = "Command"
 PROMPT_DESCR = "Description"
-PROMPT_CLEAN = ("This command will completely destroy all contents of the "
-                "tomb. Please confirm this action (y/n)")
+PROMPT_CLEAN = ("You're about to completely destroy the contents of this "
+                "tomb. Would you like to continue? (y/n)")
+PROMPT_UPDATE = ("The alias '{0}' is already being used in this tomb. Would "
+                 "you like to overwrite it? (y/n)")
 
 # Table properties.
 TABLE_HEADERS = ["Alias", "Command", "Description"]
@@ -20,8 +22,8 @@ CMD_CLEAN_NAME = "clean"
 CMD_CLEAN_DESC = "Empties the contents of a tomb."
 CMD_CLEAN_OK = "The contents of the tomb have been cleared."
 
-CMD_GRAB_NAME = "grab"
-CMD_GRAB_DESC = "Grabs a command from the tomb and executes it."
+CMD_USE_NAME = "use"
+CMD_USE_DESC = "Grabs a command from the tomb and executes it."
 
 CMD_LIST_NAME = "list"
 CMD_LIST_DESC = "Lists the commands currently stored in the tomb."

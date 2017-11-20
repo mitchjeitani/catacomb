@@ -1,6 +1,6 @@
 import json
 
-from catacomb.common import constants, errors
+from catacomb.common import constants
 from catacomb.utils import formatter
 
 
@@ -66,7 +66,7 @@ def get_command(ctx, alias):
         alias (str): The alias to save the command as.
 
     Returns:
-        The command as a `string`, or `None` if not found.
+        The command as a `string`, or None if not found.
     """
     data = read_tomb(ctx)
 
@@ -116,4 +116,6 @@ def tomb_to_table(ctx):
         desc = data[alias]["description"]
         rows.append(formatter.create_row(alias, cmd, desc))
 
-    return formatter.to_table(constants.TABLE_HEADERS, rows)
+    if len(rows):
+        return formatter.to_table(constants.TABLE_HEADERS, rows)
+    return None
