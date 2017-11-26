@@ -5,7 +5,9 @@ from catacomb.common import constants, errors
 from catacomb.utils import tomb_handler, formatter
 
 
-@click.command(constants.CMD_ADD_NAME, short_help=constants.CMD_ADD_DESC)
+@click.command(
+    constants.CMD_ADD_NAME, help=constants.CMD_ADD_DESC,
+    short_help=constants.CMD_ADD_DESC)
 @click.argument("alias", nargs=1)
 @click.argument("command", nargs=-1, required=False)
 @click.pass_context
@@ -44,7 +46,9 @@ def add(ctx, alias, command):
     formatter.print_success(constants.CMD_ADD_OK.format(alias, description))
 
 
-@click.command(constants.CMD_CLEAN_NAME, short_help=constants.CMD_CLEAN_DESC)
+@click.command(
+    constants.CMD_CLEAN_NAME, help=constants.CMD_CLEAN_DESC,
+    short_help=constants.CMD_CLEAN_DESC)
 @click.option("--force", "-f", is_flag=True, default=False)
 @click.pass_context
 def clean(ctx, force):
@@ -65,7 +69,9 @@ def clean(ctx, force):
         formatter.print_error(errors.ACTION_ABORTED)
 
 
-@click.command(constants.CMD_LIST_NAME, short_help=constants.CMD_LIST_DESC)
+@click.command(
+    constants.CMD_LIST_NAME, help=constants.CMD_LIST_DESC,
+    short_help=constants.CMD_LIST_DESC)
 @click.pass_context
 def list(ctx):
     """Lists all the commands in the current tomb.
@@ -80,7 +86,9 @@ def list(ctx):
         click.echo(table)
 
 
-@click.command(constants.CMD_RM_NAME, short_help=constants.CMD_RM_DESC)
+@click.command(
+    constants.CMD_RM_NAME, help=constants.CMD_RM_DESC,
+    short_help=constants.CMD_RM_DESC)
 @click.argument("alias", nargs=1)
 @click.pass_context
 def remove(ctx, alias):
@@ -96,7 +104,9 @@ def remove(ctx, alias):
         formatter.print_error(errors.ALIAS_NOT_FOUND.format(alias))
 
 
-@click.command(constants.CMD_USE_NAME, short_help=constants.CMD_USE_DESC)
+@click.command(
+    constants.CMD_USE_NAME, help=constants.CMD_USE_DESC,
+    short_help=constants.CMD_USE_DESC)
 @click.argument("alias", nargs=1)
 @click.pass_context
 def use(ctx, alias):

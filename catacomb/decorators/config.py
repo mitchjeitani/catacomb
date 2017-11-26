@@ -2,8 +2,6 @@ import os
 
 from catacomb import settings
 
-from pathlib import Path
-
 
 class Config(object):
     """Config is passed through the use of the `@pass_context` decorator. It
@@ -16,7 +14,7 @@ class Config(object):
 
     def __init__(self):
         self.config_dir = "{0}/{1}".format(
-                str(Path.home()), settings.CONFIG_DIR_NAME)
+                os.path.expanduser("~"), settings.CONFIG_DIR_NAME)
         self.config_path = "{0}/{1}".format(
                 str(self.config_dir), settings.CONFIG_FILE_NAME)
         self._init_catacomb()
