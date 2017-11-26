@@ -6,17 +6,19 @@ from catacomb import settings
 class Config(object):
     """Config is passed through the use of the `@pass_context` decorator. It
     contains important configuration that needs to be accessible throughout
-    the CLI.
+    the application.
 
     Attributes:
-        config_path (str): Path to the users catacomb configuration file.
+        config_dir (str): Path to the local configuration and storage
+            directory.
+        config_path (str): Path to the users configuration file.
     """
 
     def __init__(self):
         self.config_dir = "{0}/{1}".format(
-                os.path.expanduser("~"), settings.CONFIG_DIR_NAME)
+            os.path.expanduser("~"), settings.CONFIG_DIR_NAME)
         self.config_path = "{0}/{1}".format(
-                str(self.config_dir), settings.CONFIG_FILE_NAME)
+            str(self.config_dir), settings.CONFIG_FILE_NAME)
         self._init_catacomb()
 
     def _init_catacomb(self):

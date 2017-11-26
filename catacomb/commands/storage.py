@@ -19,6 +19,7 @@ def add(ctx, alias, command):
 
     Arguments:
         ctx (click.Context): Holds the state relevant for script execution.
+        alias (str): The alias of the command being added to the tomb.
         command (str): The command to add to the tomb.
     """
     if tomb_handler.get_command(ctx, alias):
@@ -49,7 +50,9 @@ def add(ctx, alias, command):
 @click.command(
     constants.CMD_CLEAN_NAME, help=constants.CMD_CLEAN_DESC,
     short_help=constants.CMD_CLEAN_DESC)
-@click.option("--force", "-f", is_flag=True, default=False)
+@click.option(
+    "--force", "-f", is_flag=True, default=False,
+    help=constants.CMD_CLEAN_FORCE_DESC)
 @click.pass_context
 def clean(ctx, force):
     """Prompts the user to confirm cleaning of the current tomb. If the user
@@ -57,6 +60,7 @@ def clean(ctx, force):
 
     Arguments:
         ctx (click.Context): Holds the state relevant for script execution.
+        force (bool): Option to disable prompting the user for confirmation.
     """
     if not force:
         # Prompt the user for command details.

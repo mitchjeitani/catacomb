@@ -1,8 +1,10 @@
+from catacomb.constants import about
+
 from setuptools import find_packages, setup
 
 setup(
-    name = "catacomb",
-    version = "0.1.3",
+    name = about.name,
+    version = about.version,
 
     py_modules = [
         "catacomb",
@@ -26,7 +28,7 @@ setup(
     # Metadata
     author = "Mitchell Jeitani",
     author_email = "mitchelljeitani@hotmail.com",
-    description = "A minimalistic CLI tool for storing shell commands.",
+    description = about.description,
     license = "MIT",
     keywords = "command-line shell productivity storage",
     url = "https://github.com/mitchjeitani/catacomb"
