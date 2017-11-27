@@ -3,10 +3,10 @@ import os
 from catacomb import settings
 
 
-class Config(object):
-    """Config is passed through the use of the `@pass_context` decorator. It
-    contains important configuration that needs to be accessible throughout
-    the application.
+class Context(object):
+    """Custom context that is passed through the use of the `@pass_context`
+    decorator. Contains important configuration that needs to be accessible
+    throughout the application.
 
     Attributes:
         config_dir (str): Path to the local configuration and storage

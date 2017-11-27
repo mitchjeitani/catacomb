@@ -1,7 +1,7 @@
 import click
 import pytest
 
-from catacomb import catacomb
+from catacomb import entry_points
 from catacomb.common import constants
 
 from click.testing import CliRunner
@@ -18,7 +18,7 @@ class TestHelp(object):
     """
 
     def test_tomb_help_view(self, help_flag):
-        result = CliRunner().invoke(catacomb.tomb, help_flag)
+        result = CliRunner().invoke(entry_points.tomb_entry, help_flag)
 
         # No failure.
         assert result.exit_code == 0
@@ -29,7 +29,8 @@ class TestHelp(object):
         assert "Commands:" in result.output
 
     def test_add_help_view(self, help_flag):
-        result = CliRunner().invoke(catacomb.tomb, ["add", help_flag[0]])
+        result = CliRunner().invoke(
+            entry_points.tomb_entry, ["add", help_flag[0]])
 
         assert result.exit_code == 0
 
@@ -41,7 +42,8 @@ class TestHelp(object):
         assert "Commands:" not in result.output
 
     def test_clean_help_view(self, help_flag):
-        result = CliRunner().invoke(catacomb.tomb, ["clean", help_flag[0]])
+        result = CliRunner().invoke(
+            entry_points.tomb_entry, ["clean", help_flag[0]])
 
         assert result.exit_code == 0
 
@@ -53,7 +55,8 @@ class TestHelp(object):
         assert "Commands:" not in result.output
 
     def test_list_help_view(self, help_flag):
-        result = CliRunner().invoke(catacomb.tomb, ["list", help_flag[0]])
+        result = CliRunner().invoke(
+            entry_points.tomb_entry, ["list", help_flag[0]])
 
         assert result.exit_code == 0
 
@@ -65,7 +68,8 @@ class TestHelp(object):
         assert "Commands:" not in result.output
 
     def test_rm_help_view(self, help_flag):
-        result = CliRunner().invoke(catacomb.tomb, ["rm", help_flag[0]])
+        result = CliRunner().invoke(
+            entry_points.tomb_entry, ["rm", help_flag[0]])
 
         assert result.exit_code == 0
 
@@ -77,7 +81,8 @@ class TestHelp(object):
         assert "Commands:" not in result.output
 
     def test_use_help_view(self, help_flag):
-        result = CliRunner().invoke(catacomb.tomb, ["use", help_flag[0]])
+        result = CliRunner().invoke(
+            entry_points.tomb_entry, ["use", help_flag[0]])
 
         assert result.exit_code == 0
 

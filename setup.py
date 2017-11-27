@@ -1,4 +1,4 @@
-from catacomb.constants import about
+from catacomb.common import about
 
 from setuptools import find_packages, setup
 
@@ -21,7 +21,7 @@ setup(
     # Script execution
     entry_points = {
         "console_scripts": [
-            "tomb = catacomb.catacomb:tomb",
+            "tomb = catacomb.entry_points:tomb_entry",
         ]
     },
 
