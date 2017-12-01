@@ -13,7 +13,7 @@ def read_tomb(ctx):
     Returns:
         A `dict` representing the contents of the tomb.
     """
-    with open(ctx.obj.config_path, "r") as f:
+    with open(ctx.obj.open_tomb_path, "r") as f:
         json_data = json.load(f)
     return json_data
 
@@ -25,7 +25,7 @@ def write_tomb(ctx, data):
         ctx (click.Context): Holds the state relevant for script execution.
         data (dict): The data to store in the tomb.
     """
-    with open(ctx.obj.config_path, "w") as f:
+    with open(ctx.obj.open_tomb_path, "w") as f:
         f.write(json.dumps(data, indent=2))
 
 

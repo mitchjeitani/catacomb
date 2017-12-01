@@ -25,7 +25,7 @@ def add(ctx, alias, command):
         # If the `alias` specified is already used for a command in the tomb,
         # prompt the user to determine if they want to overwrite the old
         # command.
-        update = click.prompt(constants.PROMPT_UPDATE.format(alias))
+        update = click.prompt(constants.CMD_ADD_UPDATE_PROMPT.format(alias))
         if update.lower() != "y":
             # Abort the action.
             formatter.print_error(errors.ACTION_ABORTED)
@@ -34,12 +34,12 @@ def add(ctx, alias, command):
     if not command:
         # If the `command` hasn't yet been specified we'll need to prompt the
         # user for that as well.
-        command = click.prompt(constants.PROMPT_CMD)
+        command = click.prompt(constants.CMD_ADD_CMD_PROMPT)
     else:
         # The argument `command` is passed as a tuple, so we'll need to convert
         # it to a string in order to evaluate it later.
         command = " ".join(command)
-    description = click.prompt(constants.PROMPT_DESCR)
+    description = click.prompt(constants.CMD_ADD_DESC_PROMPT)
 
     # Save the new command to the current tomb.
     tomb_handler.add_command(ctx, command, alias, description)

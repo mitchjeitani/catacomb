@@ -1,30 +1,42 @@
-# User prompts.
-PROMPT_CMD = "Command"
-PROMPT_DESCR = "Description"
-PROMPT_CLEAN = (
-    "You're about to completely destroy the contents of this "
-    "tomb. Would you like to continue? (y/n)")
-PROMPT_UPDATE = (
-    "The alias '{0}' is already being used in this tomb. Would "
-    "you like to overwrite it? (y/n)")
-
 # Table properties.
 TABLE_HEADERS = ["Alias", "Command", "Description"]
-
-# Limits.
 MAX_TABLE_WIDTH = 30
 
-# Command definitions.
+# `catacomb` subcommand definitions.
+CMD_BURY_NAME = "bury"
+CMD_BURY_DESC = "Permanently buries a tomb, preventing any further use."
+CMD_BURY_OK = (
+    "The tomb '{0}' has been buried into the furthest depths of the catacomb.")
+CMD_BURY_FORCE_DESC = "Ignore the prompt for user confirmation."
+
+CMD_CREATE_NAME = "create"
+CMD_CREATE_DESC = "Creates a new tomb in the catacomb."
+CMD_CREATE_OK = "A new tomb has been constructed with alias '{0}'."
+
+CMD_OPEN_NAME = "open"
+CMD_OPEN_DESC = "Opens an existing tomb."
+CMD_OPEN_OK = "Switched to tomb '{0}'."
+CMD_OPEN_NEW_DESC = "Creates and opens a new tomb."
+
+# `tomb` subcommand definitions.
 CMD_ADD_NAME = "add"
 CMD_ADD_DESC = "Stores a new command in the tomb."
 CMD_ADD_OK = (
     "Successfully added the command with alias '{0}', and "
     "description '{1}' to the tomb.")
+CMD_ADD_CMD_PROMPT = "Command"
+CMD_ADD_DESC_PROMPT = "Description"
+CMD_ADD_UPDATE_PROMPT = (
+    "The alias '{0}' is already being used in this tomb. Would "
+    "you like to overwrite it? (Y/n)")
 
 CMD_CLEAN_NAME = "clean"
 CMD_CLEAN_DESC = "Empties the contents of a tomb."
 CMD_CLEAN_OK = "The contents of the tomb have been cleared."
 CMD_CLEAN_FORCE_DESC = "Ignore the prompt for user confirmation."
+CMD_CLEAN_PROMPT = (
+    "You're about to completely destroy the contents of this "
+    "tomb. Would you like to continue? (Y/n)")
 
 CMD_USE_NAME = "use"
 CMD_USE_DESC = "Grabs a command from the tomb and executes it."

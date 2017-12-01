@@ -21,7 +21,7 @@ def clean(ctx, force):
     """
     if not force:
         # Prompt the user for command details.
-        confirm = click.prompt(constants.PROMPT_CLEAN)
+        confirm = click.prompt(constants.CMD_CLEAN_PROMPT)
 
     if force or confirm.lower() == "y":
         tomb_handler.clean_tomb(ctx)

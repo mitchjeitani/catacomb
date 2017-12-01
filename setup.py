@@ -21,6 +21,7 @@ setup(
     # Script execution
     entry_points = {
         "console_scripts": [
+            "catacomb = catacomb.entry_points:catacomb_entry",
             "tomb = catacomb.entry_points:tomb_entry",
         ]
     },

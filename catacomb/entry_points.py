@@ -12,6 +12,24 @@ pass_context = click.make_pass_decorator(Context, ensure=True)
     context_settings=settings.CONTEXT_SETTINGS, help=about.description,
     cls=PluginLoader)
 @pass_context
+def catacomb_entry(ctx):
+    """Entry point for the `catacomb` command. Passes responsibility of
+    handling a command down the chain of subcommand handlers until we've found
+    one that can handle the given subcommand.
+
+    This entry point handles actions involving the operations that alter the
+    state of the catacomb and tombs within it.
+
+    Arguments:
+        ctx (click.Context): Holds the state relevant for script execution.
+    """
+    pass
+
+
+@click.group(
+    context_settings=settings.CONTEXT_SETTINGS, help=about.description,
+    cls=PluginLoader)
+@pass_context
 def tomb_entry(ctx):
     """Entry point for the `tomb` command. Passes responsibility of handling
     a command down the chain of subcommand handlers until we've found one that
