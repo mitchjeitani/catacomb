@@ -1,6 +1,6 @@
 import click
 
-from catacomb.common import constants, errors
+from catacomb.common import constants
 from catacomb.utils import tomb_handler, formatter
 
 
@@ -27,4 +27,4 @@ def clean(ctx, force):
         tomb_handler.clean_tomb(ctx)
         formatter.print_success(constants.CMD_CLEAN_OK)
     else:
-        formatter.print_error(errors.ACTION_ABORTED)
+        formatter.print_warning(constants.WARN_ACTION_ABORTED)

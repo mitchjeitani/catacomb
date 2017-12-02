@@ -47,3 +47,11 @@ CMD_LIST_DESC = "Lists the commands currently stored in the tomb."
 CMD_RM_NAME = "rm"
 CMD_RM_DESC = "Removes a command from the tomb."
 CMD_RM_OK = "Successfully removed the command with alias '{0}' from the tomb."
+
+# Command related warnings.
+WARN_ACTION_ABORTED = "The action was aborted."
+WARN_CMD_NOT_FOUND = (
+    "The alias '{0}' doesn't correspond to any of the contents in this tomb.")
+WARN_EMPTY_TOMB = "Nothing but crumbled bones and dust..."
+WARN_TOMB_NOT_FOUND = (
+    "The alias '{0}' doesn't correspond to any of the tombs in the catacomb.")

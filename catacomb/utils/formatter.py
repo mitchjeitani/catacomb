@@ -22,7 +22,7 @@ def color_text(text, color):
         return click.style(text, fg=color)
     except TypeError:
         # Invalid color specified.
-        print_error(errors.INVALID_COLOR.format(color))
+        print_warning(errors.INVALID_COLOR.format(color))
     return text
 
 
@@ -60,7 +60,7 @@ def create_row(alias, command, description):
     ]
 
 
-def print_error(message):
+def print_warning(message):
     """Correctly styles and prints an error message to standard output.
 
     Arguments:

@@ -1,7 +1,7 @@
 import click
 import os
 
-from catacomb.common import constants, errors
+from catacomb.common import constants
 from catacomb.utils import tomb_handler, formatter
 
 
@@ -24,4 +24,4 @@ def use(ctx, alias):
         os.system(cmd)
     else:
         # The command alias doesn't exist.
-        formatter.print_error(errors.ALIAS_NOT_FOUND.format(alias))
+        formatter.print_warning(constants.WARN_CMD_NOT_FOUND.format(alias))

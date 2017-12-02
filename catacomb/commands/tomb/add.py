@@ -1,6 +1,6 @@
 import click
 
-from catacomb.common import constants, errors
+from catacomb.common import constants
 from catacomb.utils import tomb_handler, formatter
 
 
@@ -28,7 +28,7 @@ def add(ctx, alias, command):
         update = click.prompt(constants.CMD_ADD_UPDATE_PROMPT.format(alias))
         if update.lower() != "y":
             # Abort the action.
-            formatter.print_error(errors.ACTION_ABORTED)
+            formatter.print_warning(constants.WARN_ACTION_ABORTED)
             return
 
     if not command:

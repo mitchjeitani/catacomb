@@ -1,6 +1,6 @@
 import click
 
-from catacomb.common import constants, errors
+from catacomb.common import constants
 from catacomb.utils import tomb_handler, formatter
 
 
@@ -19,4 +19,4 @@ def rm(ctx, alias):
     if tomb_handler.remove_command(ctx, alias):
         formatter.print_success(constants.CMD_RM_OK.format(alias))
     else:
-        formatter.print_error(errors.ALIAS_NOT_FOUND.format(alias))
+        formatter.print_warning(constants.WARN_CMD_NOT_FOUND.format(alias))

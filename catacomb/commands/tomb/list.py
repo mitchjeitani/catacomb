@@ -1,6 +1,6 @@
 import click
 
-from catacomb.common import constants, errors
+from catacomb.common import constants
 from catacomb.utils import tomb_handler, formatter
 
 
@@ -16,6 +16,6 @@ def list(ctx):
     """
     table = tomb_handler.tomb_to_table(ctx)
     if table is None:
-        formatter.print_error(errors.EMPTY_TOMB)
+        formatter.print_warning(constants.WARN_EMPTY_TOMB)
     else:
         click.echo(table)
