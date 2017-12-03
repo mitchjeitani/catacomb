@@ -12,6 +12,7 @@ CMD_BURY_FORCE_DESC = "Ignore the prompt for user confirmation."
 CMD_CREATE_NAME = "create"
 CMD_CREATE_DESC = "Creates a new tomb in the catacomb."
 CMD_CREATE_OK = "A new tomb has been constructed with alias '{0}'."
+CMD_CREATE_FORCE_DESC = "Overwrite a tomb if it already exists."
 
 CMD_OPEN_NAME = "open"
 CMD_OPEN_DESC = "Opens an existing tomb."
@@ -53,5 +54,6 @@ WARN_ACTION_ABORTED = "The action was aborted."
 WARN_CMD_NOT_FOUND = (
     "The alias '{0}' doesn't correspond to any of the contents in this tomb.")
 WARN_EMPTY_TOMB = "Nothing but crumbled bones and dust..."
+WARN_TOMB_EXISTS = "The tomb with alias '{0}' already exists."
 WARN_TOMB_NOT_FOUND = (
     "The alias '{0}' doesn't correspond to any of the tombs in the catacomb.")

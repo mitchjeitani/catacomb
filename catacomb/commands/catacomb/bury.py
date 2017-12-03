@@ -7,11 +7,12 @@ from catacomb.utils import tomb_handler, formatter
 @click.command(
     constants.CMD_BURY_NAME, help=constants.CMD_BURY_DESC,
     short_help=constants.CMD_BURY_DESC)
+@click.argument("tomb_name", nargs=1)
 @click.option(
     "--force", "-f", is_flag=True, default=False,
     help=constants.CMD_BURY_FORCE_DESC)
 @click.pass_context
-def bury(ctx, force):
+def bury(ctx, tomb_name, force):
     """Creates a new tomb and switches to it
 
     Arguments:

@@ -5,6 +5,11 @@ CONFIG_FILE_NAME = ".catacomb_config"
 TOMB_DIR_NAME = "tombs"
 TOMB_FILE_NAME = "default"
 
+# Default user configuration.
+DEFAULT_CONFIG = {
+    "open_tomb_name": TOMB_FILE_NAME
+}
+
 # Settings to override on the context object.
 CONTEXT_SETTINGS = {
     "help_option_names": ["-h", "--help"]

@@ -1,3 +1,4 @@
+import json
 import os
 
 from catacomb import settings
@@ -14,7 +15,6 @@ class Context(object):
         config_file_path (str): Path to the local configuration file.
         catacomb_dir (str): Path to the catacomb directory that stores
             the contents of every tomb.
-        open_tomb_path (str): The path to the tomb that is currently open.
     """
 
     def __init__(self):
@@ -24,7 +24,7 @@ class Context(object):
             str(self.config_dir), settings.CONFIG_FILE_NAME)
         self.catacomb_dir = os.path.join(
             self.config_dir, settings.TOMB_DIR_NAME)
-        self.open_tomb_path = os.path.join(
+        self._open_tomb_path = os.path.join(
             self.catacomb_dir, settings.TOMB_FILE_NAME)
         self._init_catacomb()
 
@@ -42,10 +42,35 @@ class Context(object):
         # already exist.
         if not os.path.isfile(self.config_file_path):
             with open(self.config_file_path, "w") as config:
-                config.write("{}")
+                config.write(json.dumps(settings.DEFAULT_CONFIG, indent=2))
         else:
-            # TODO: Read which tomb to use from the configuration file.
-            pass
-        if not os.path.isfile(self.open_tomb_path):
-            with open(self.open_tomb_path, "w") as default_tomb:
+            # If configuration does exist, read which tomb we should be using.
+            with open(self.config_file_path, "r") as config:
+                json_data = json.load(config)
+                self._open_tomb_path = os.path.join(
+                    self.catacomb_dir, json_data["open_tomb_name"])
+
+        # Initialise a default tomb if no tomb currently exists.
+        if not os.path.isfile(self._open_tomb_path):
+            with open(self._open_tomb_path, "w") as default_tomb:
                 default_tomb.write("{}")
+
+    @property
+    def open_tomb_path(self):
+        return self._open_tomb_path
+
+    @open_tomb_path.setter
+    def open_tomb_path(self, tomb_name):
+        """Sets the current open tomb path to that of the specified tomb.
+
+        Arguments:
+            tomb_name (str): The name of the tomb.
+
+        Returns:
+            A `bool`, True if the tomb exists, False otherwise.
+        """
+        new_tomb_path = os.path.join(self.catacomb_dir, tomb_name)
+        if os.path.isfile(new_tomb_path):
+            self._open_tomb_path = new_tomb_path
+            return True
+        return False
