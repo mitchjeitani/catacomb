@@ -2,6 +2,7 @@ import json
 import os
 
 from catacomb import settings
+from catacomb.common import constants
 
 
 class Context(object):
@@ -25,7 +26,7 @@ class Context(object):
         self.catacomb_dir = os.path.join(
             self.config_dir, settings.TOMB_DIR_NAME)
         self._open_tomb_path = os.path.join(
-            self.catacomb_dir, settings.TOMB_FILE_NAME)
+            self.catacomb_dir, settings.TOMB_DEFAULT_FILE_NAME)
         self._init_catacomb()
 
     def _init_catacomb(self):
@@ -42,7 +43,9 @@ class Context(object):
         # already exist.
         if not os.path.isfile(self.config_file_path):
             with open(self.config_file_path, "w") as config:
-                config.write(json.dumps(settings.DEFAULT_CONFIG, indent=2))
+                config.write(json.dumps(
+                    settings.DEFAULT_CONFIG,
+                    indent=constants.CONFIG_INDENT_NUM))
         else:
             # If configuration does exist, read which tomb we should be using.
             with open(self.config_file_path, "r") as config:
@@ -53,7 +56,9 @@ class Context(object):
         # Initialise a default tomb if no tomb currently exists.
         if not os.path.isfile(self._open_tomb_path):
             with open(self._open_tomb_path, "w") as default_tomb:
-                default_tomb.write("{}")
+                default_tomb.write(json.dumps(
+                    settings.DEFAULT_TOMB_CONTENTS,
+                    indent=constants.CONFIG_INDENT_NUM))
 
     @property
     def open_tomb_path(self):

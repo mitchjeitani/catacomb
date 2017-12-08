@@ -1,3 +1,6 @@
+# Misc values.
+CONFIG_INDENT_NUM = 2
+
 # Table properties.
 TABLE_HEADERS = ["Alias", "Command", "Description"]
 MAX_TABLE_WIDTH = 30
@@ -13,6 +16,7 @@ CMD_CREATE_NAME = "create"
 CMD_CREATE_DESC = "Creates a new tomb in the catacomb."
 CMD_CREATE_OK = "A new tomb has been constructed with alias '{0}'."
 CMD_CREATE_FORCE_DESC = "Overwrite a tomb if it already exists."
+CMD_CREATE_DESC_PROMPT = "Description"
 
 CMD_OPEN_NAME = "open"
 CMD_OPEN_DESC = "Opens an existing tomb."

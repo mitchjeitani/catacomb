@@ -17,7 +17,7 @@ def bury(ctx, tomb_name, force):
 
     Arguments:
         ctx (click.Context): Holds the state relevant for script execution.
-        force (bool): If True, burys a tomb without prompting the user for
-            confirmation.
+        tomb_name (str): The name/alias of the tomb.
+        force (bool): Option to disable prompting the user for confirmation.
     """
     pass

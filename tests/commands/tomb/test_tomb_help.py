@@ -7,13 +7,13 @@ from catacomb.common import constants
 from click.testing import CliRunner
 
 
-# Fixtures
+# Fixtures.
 @pytest.fixture(scope="module", params=[["-h"], ["--help"]])
 def help_flag(request):
     return request.param
 
 
-class TestHelp(object):
+class TestTombHelp(object):
     """Testing various scenarios that should show the help view.
     """
 

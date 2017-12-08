@@ -4,7 +4,7 @@ from catacomb.common import constants
 from catacomb.utils import formatter
 
 
-def read_tomb(ctx):
+def read_tomb_commands(ctx):
     """Reads the contents of a tomb.
 
     Arguments:
@@ -15,18 +15,25 @@ def read_tomb(ctx):
     """
     with open(ctx.obj.open_tomb_path, "r") as f:
         json_data = json.load(f)
-    return json_data
+        tomb_data = json_data["commands"]
+    return tomb_data
 
 
-def write_tomb(ctx, data):
-    """Replaces the current contents of the tomb with `data`.
+def update_tomb_commands(ctx, cmds):
+    """Replaces the current contents of the tomb with `cmds`.
 
     Arguments:
         ctx (click.Context): Holds the state relevant for script execution.
-        data (dict): The data to store in the tomb.
+        cmds (dict): The commands to store in the tomb.
     """
+    with open(ctx.obj.open_tomb_path, "r") as f:
+        # We need to preserve the tombs other attributes (e.g. description),
+        # and only need to write to "commands".
+        tomb_contents = json.load(f)
+        tomb_contents["commands"] = cmds
+
     with open(ctx.obj.open_tomb_path, "w") as f:
-        f.write(json.dumps(data, indent=2))
+        f.write(json.dumps(tomb_contents, indent=constants.CONFIG_INDENT_NUM))
 
 
 def clean_tomb(ctx):
@@ -36,7 +43,7 @@ def clean_tomb(ctx):
     Arguments:
         ctx (click.Context): Holds the state relevant for script execution.
     """
-    write_tomb(ctx, {})
+    update_tomb_commands(ctx, {})
 
 
 def add_command(ctx, command, alias, description):
@@ -48,14 +55,14 @@ def add_command(ctx, command, alias, description):
         alias (str): The alias to save the command as.
         description (str): What the command does.
     """
-    data = read_tomb(ctx)
+    data = read_tomb_commands(ctx)
 
     data[alias] = {
         "command": command,
         "description": description
     }
 
-    write_tomb(ctx, data)
+    update_tomb_commands(ctx, data)
 
 
 def get_command(ctx, alias):
@@ -68,7 +75,7 @@ def get_command(ctx, alias):
     Returns:
         The command as a `string`, or None if not found.
     """
-    data = read_tomb(ctx)
+    data = read_tomb_commands(ctx)
 
     if alias in data:
         return data[alias]["command"]
@@ -85,14 +92,14 @@ def remove_command(ctx, alias):
     Returns:
         A `bool`, True if the alias could be removed, False otherwise.
     """
-    data = read_tomb(ctx)
+    data = read_tomb_commands(ctx)
 
     if alias not in data:
         return False
 
     # Remove the command then write back to the file.
     del data[alias]
-    write_tomb(ctx, data)
+    update_tomb_commands(ctx, data)
 
     return True
 
@@ -107,7 +114,7 @@ def tomb_to_table(ctx):
     Returns:
         A `string` representation of the table.
     """
-    data = read_tomb(ctx)
+    data = read_tomb_commands(ctx)
 
     # Convert each stored command to it's own row.
     rows = []

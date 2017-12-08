@@ -17,8 +17,14 @@ def create(ctx, tomb_name, force):
 
     Arguments:
         ctx (click.Context): Holds the state relevant for script execution.
+        tomb_name (str): The name/alias of the tomb.
+        force (bool): Option to disable prompting the user for confirmation.
     """
-    if catacomb_handler.create_tomb(ctx, tomb_name, force):
+    # Check if there currently exists a tomb that has the same name as the
+    # one specified before creating a new one.
+    if not catacomb_handler.is_tomb(ctx, tomb_name) or force:
+        description = click.prompt(constants.CMD_CREATE_DESC_PROMPT)
+        catacomb_handler.create_tomb(ctx, tomb_name, description)
         formatter.print_success(constants.CMD_CREATE_OK.format(tomb_name))
     else:
         formatter.print_warning(constants.WARN_TOMB_EXISTS.format(tomb_name))
