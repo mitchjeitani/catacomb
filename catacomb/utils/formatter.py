@@ -54,9 +54,9 @@ def create_row(alias, command, description):
         A `list` representing the new row for a command.
     """
     return [
-        textwrap.fill(alias, constants.MAX_TABLE_WIDTH),
-        textwrap.fill(command, constants.MAX_TABLE_WIDTH),
-        textwrap.fill(description, constants.MAX_TABLE_WIDTH),
+        textwrap.fill(alias, constants.TABLE_MAX_WIDTH),
+        textwrap.fill(command, constants.TABLE_MAX_WIDTH),
+        textwrap.fill(description, constants.TABLE_MAX_WIDTH),
     ]
 
 

@@ -1,9 +1,9 @@
 # Misc values.
-CONFIG_INDENT_NUM = 2
+INDENT_NUM_SPACES = 2
 
 # Table properties.
 TABLE_HEADERS = ["Alias", "Command", "Description"]
-MAX_TABLE_WIDTH = 30
+TABLE_MAX_WIDTH = 30
 
 # `catacomb` subcommand definitions.
 CMD_BURY_NAME = "bury"
@@ -22,6 +22,9 @@ CMD_OPEN_NAME = "open"
 CMD_OPEN_DESC = "Opens an existing tomb."
 CMD_OPEN_OK = "Switched to tomb '{0}'."
 CMD_OPEN_NEW_DESC = "Creates and opens a new tomb."
+CMD_OPEN_NEW_DESC_PROMPT = "Description"
+CMD_OPEN_NEW_OK = "Switched to new tomb '{0}'."
+CMD_OPEN_SELF_WARN = "Tomb '{0}' is already open."
 
 # `tomb` subcommand definitions.
 CMD_ADD_NAME = "add"
@@ -53,7 +56,7 @@ CMD_RM_NAME = "rm"
 CMD_RM_DESC = "Removes a command from the tomb."
 CMD_RM_OK = "Successfully removed the command with alias '{0}' from the tomb."
 
-# Command related warnings.
+# General command related warnings.
 WARN_ACTION_ABORTED = "The action was aborted."
 WARN_CMD_NOT_FOUND = (
     "The alias '{0}' doesn't correspond to any of the contents in this tomb.")

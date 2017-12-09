@@ -1,7 +1,7 @@
 import click
 
-from catacomb.common import constants, errors
-from catacomb.utils import tomb_handler, formatter
+from catacomb.common import constants
+from catacomb.utils import catacomb_handler, formatter
 
 
 @click.command(
@@ -21,4 +21,30 @@ def open(ctx, tomb_name, new):
         new (bool): If True, create a new tomb (if it doesn't exist) and then
             switch to it.
     """
-    pass
+    if catacomb_handler.get_current_tomb_name(ctx).lower() == tomb_name:
+        # Don't do anything if the specified tomb is already open.
+        if new:
+            formatter.print_warning(constants.WARN_TOMB_EXISTS.format(
+                tomb_name))
+        else:
+            formatter.print_warning(constants.CMD_OPEN_SELF_WARN.format(
+                tomb_name))
+    elif new:
+        # Create a new tomb and switch to it.
+        if not catacomb_handler.is_existing_tomb(ctx, tomb_name):
+            description = click.prompt(constants.CMD_OPEN_NEW_DESC_PROMPT)
+            catacomb_handler.create_tomb(ctx, tomb_name, description)
+            catacomb_handler.open_tomb(ctx, tomb_name)
+            formatter.print_success(constants.CMD_OPEN_NEW_OK.format(
+                tomb_name))
+        else:
+            # Do nothing if a tomb with the provided alias already exists.
+            formatter.print_warning(constants.WARN_TOMB_EXISTS.format(
+                tomb_name))
+    elif catacomb_handler.is_existing_tomb(ctx, tomb_name):
+        # Otherwise open a new tomb if it exists.
+        catacomb_handler.open_tomb(ctx, tomb_name)
+        formatter.print_success(constants.CMD_OPEN_OK.format(tomb_name))
+    else:
+        formatter.print_warning(constants.WARN_TOMB_NOT_FOUND.format(
+            tomb_name))

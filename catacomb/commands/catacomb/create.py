@@ -1,6 +1,6 @@
 import click
 
-from catacomb.common import constants, errors
+from catacomb.common import constants
 from catacomb.utils import catacomb_handler, formatter
 
 
@@ -22,7 +22,7 @@ def create(ctx, tomb_name, force):
     """
     # Check if there currently exists a tomb that has the same name as the
     # one specified before creating a new one.
-    if not catacomb_handler.is_tomb(ctx, tomb_name) or force:
+    if not catacomb_handler.is_existing_tomb(ctx, tomb_name) or force:
         description = click.prompt(constants.CMD_CREATE_DESC_PROMPT)
         catacomb_handler.create_tomb(ctx, tomb_name, description)
         formatter.print_success(constants.CMD_CREATE_OK.format(tomb_name))

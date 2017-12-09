@@ -13,7 +13,7 @@ def read_tomb_commands(ctx):
     Returns:
         A `dict` representing the contents of the tomb.
     """
-    with open(ctx.obj.open_tomb_path, "r") as f:
+    with open(ctx.obj.open_tomb, "r") as f:
         json_data = json.load(f)
         tomb_data = json_data["commands"]
     return tomb_data
@@ -26,14 +26,14 @@ def update_tomb_commands(ctx, cmds):
         ctx (click.Context): Holds the state relevant for script execution.
         cmds (dict): The commands to store in the tomb.
     """
-    with open(ctx.obj.open_tomb_path, "r") as f:
+    with open(ctx.obj.open_tomb, "r") as f:
         # We need to preserve the tombs other attributes (e.g. description),
         # and only need to write to "commands".
         tomb_contents = json.load(f)
         tomb_contents["commands"] = cmds
 
-    with open(ctx.obj.open_tomb_path, "w") as f:
-        f.write(json.dumps(tomb_contents, indent=constants.CONFIG_INDENT_NUM))
+    with open(ctx.obj.open_tomb, "w") as f:
+        f.write(json.dumps(tomb_contents, indent=constants.INDENT_NUM_SPACES))
 
 
 def clean_tomb(ctx):

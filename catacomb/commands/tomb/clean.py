@@ -1,7 +1,7 @@
 import click
 
 from catacomb.common import constants
-from catacomb.utils import tomb_handler, formatter
+from catacomb.utils import formatter, tomb_handler
 
 
 @click.command(
