@@ -13,7 +13,8 @@ from catacomb.utils import catacomb_handler, formatter
     help=constants.CMD_OPEN_NEW_DESC)
 @click.pass_context
 def open(ctx, tomb_name, new):
-    """Creates a new tomb and switches to it.
+    """Opens the tomb specified by the user, granting access to all the
+    commands stored within it.
 
     Arguments:
         ctx (click.Context): Holds the state relevant for script execution.

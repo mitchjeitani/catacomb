@@ -2,7 +2,7 @@ import json
 import os
 
 from catacomb import settings
-from catacomb.common import constants
+from catacomb.common import constants, errors
 
 
 def is_existing_tomb(ctx, tomb_name):
@@ -39,6 +39,7 @@ def create_tomb(ctx, tomb_name, description):
         tomb_name (str): The name of the new tomb.
     """
     new_tomb_path = os.path.join(ctx.obj.catacomb_dir, tomb_name)
+
     with open(new_tomb_path, "w") as new_tomb:
         new_tomb.write(json.dumps(
             settings.DEFAULT_TOMB_CONTENTS,
@@ -53,4 +54,20 @@ def open_tomb(ctx, tomb_name):
         ctx (click.Context): Holds the state relevant for script execution.
         tomb_name (str): The name of the new tomb.
     """
-    ctx.obj.open_tomb = tomb_name
+    if is_existing_tomb(ctx, tomb_name):
+        ctx.obj.open_tomb = tomb_name
+    else:
+        formatter.print_warning(errors.OPEN_UNKNOWN_TOMB.format(tomb_name))
+
+
+def remove_tomb(ctx, tomb_name):
+    """Removes a tomb from the catacomb.
+
+    Arguments:
+        ctx (click.Context): Holds the state relevant for script execution.
+        tomb_name (str): The name of the new tomb.
+    """
+    if is_existing_tomb(ctx, tomb_name):
+        os.remove(os.path.join(ctx.obj.catacomb_dir, tomb_name))
+    else:
+        formatter.print_warning(errors.BURY_UNKNOWN_TOMB.format(tomb_name))

@@ -8,15 +8,18 @@ TABLE_MAX_WIDTH = 30
 # `catacomb` subcommand definitions.
 CMD_BURY_NAME = "bury"
 CMD_BURY_DESC = "Permanently buries a tomb, preventing any further use."
-CMD_BURY_OK = (
-    "The tomb '{0}' has been buried into the furthest depths of the catacomb.")
+CMD_BURY_PROMPT = ("You're about to bury the tomb '{0}' for good. Would you "
+    "like to continue? (Y/n)")
 CMD_BURY_FORCE_DESC = "Ignore the prompt for user confirmation."
+CMD_BURY_OK = ("The tomb '{0}' has been removed from the catacomb.")
+CMD_BURY_SELF_WARN = (
+    "The tomb '{0}' is currently open and can not be buried.")
 
 CMD_CREATE_NAME = "create"
 CMD_CREATE_DESC = "Creates a new tomb in the catacomb."
-CMD_CREATE_OK = "A new tomb has been constructed with alias '{0}'."
-CMD_CREATE_FORCE_DESC = "Overwrite a tomb if it already exists."
 CMD_CREATE_DESC_PROMPT = "Description"
+CMD_CREATE_FORCE_DESC = "Overwrite a tomb if it already exists."
+CMD_CREATE_OK = "A new tomb has been constructed with alias '{0}'."
 
 CMD_OPEN_NAME = "open"
 CMD_OPEN_DESC = "Opens an existing tomb."

@@ -13,7 +13,7 @@ from catacomb.utils import catacomb_handler, formatter
     help=constants.CMD_CREATE_FORCE_DESC)
 @click.pass_context
 def create(ctx, tomb_name, force):
-    """Creates a new tomb and switches to it
+    """Creates a new tomb.
 
     Arguments:
         ctx (click.Context): Holds the state relevant for script execution.
