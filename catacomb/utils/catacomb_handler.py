@@ -3,6 +3,7 @@ import os
 
 from catacomb import settings
 from catacomb.common import constants, errors
+from catacomb.utils import formatter
 
 
 def is_existing_tomb(ctx, tomb_name):
@@ -25,6 +26,36 @@ def get_current_tomb_name(ctx):
         The name of the current tomb as a `string`.
     """
     return ctx.obj.open_tomb_name
+
+
+def catacomb_to_table(ctx):
+    """Converts the catacomb in to a table containing information about each
+    tomb stored.
+
+    Returns:
+        A `string` representation of the table.
+    """
+    # Collect all the available tomb paths.
+    for root, dirnames, names in os.walk(ctx.obj.catacomb_dir):
+        tomb_names = sorted(names)
+        tomb_paths = [os.path.join(root, name) for name in tomb_names]
+
+    # Open each tomb and grab the description.
+    tombs = []
+    for idx, path in enumerate(tomb_paths):
+        with open(path, "r") as tomb:
+            tomb = json.load(tomb)
+        tombs.append((tomb_names[idx], tomb["description"]))
+
+    # Construct a table row for each tomb.
+    rows = []
+    for tomb in tombs:
+        name, desc = tomb
+        rows.append(formatter.create_row(name, desc))
+
+    if len(rows):
+        return formatter.to_table(constants.TABLE_HEADERS_TOMB, rows)
+    return None
 
 
 def create_tomb(ctx, tomb_name, description):
@@ -53,6 +84,7 @@ def open_tomb(ctx, tomb_name):
         ctx.obj.open_tomb = tomb_name
     else:
         formatter.print_warning(errors.OPEN_UNKNOWN_TOMB.format(tomb_name))
+        exit(1)
 
 
 def remove_tomb(ctx, tomb_name):
@@ -65,3 +97,4 @@ def remove_tomb(ctx, tomb_name):
         os.remove(os.path.join(ctx.obj.catacomb_dir, tomb_name))
     else:
         formatter.print_warning(errors.BURY_UNKNOWN_TOMB.format(tomb_name))
+        exit(1)

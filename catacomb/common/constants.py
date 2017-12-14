@@ -2,14 +2,16 @@
 INDENT_NUM_SPACES = 2
 
 # Table properties.
-TABLE_HEADERS = ["Alias", "Command", "Description"]
-TABLE_MAX_WIDTH = 30
+TABLE_HEADERS_CMD = ["Alias", "Command", "Description"]
+TABLE_HEADERS_TOMB = ["Name", "Description"]
+TABLE_COL_MAX_WIDTH = 30
 
 # `catacomb` subcommand definitions.
 CMD_BURY_NAME = "bury"
 CMD_BURY_DESC = "Permanently buries a tomb, preventing any further use."
-CMD_BURY_PROMPT = ("You're about to bury the tomb '{0}' for good. Would you "
-    "like to continue? (Y/n)")
+CMD_BURY_PROMPT = (
+    "You're about to bury the tomb '{0}' for good. Would you like to continue"
+    "? (Y/n)")
 CMD_BURY_FORCE_DESC = "Ignore the prompt for user confirmation."
 CMD_BURY_OK = ("The tomb '{0}' has been removed from the catacomb.")
 CMD_BURY_SELF_WARN = (
@@ -20,6 +22,9 @@ CMD_CREATE_DESC = "Creates a new tomb in the catacomb."
 CMD_CREATE_DESC_PROMPT = "Description"
 CMD_CREATE_FORCE_DESC = "Overwrite a tomb if it already exists."
 CMD_CREATE_OK = "A new tomb has been constructed with alias '{0}'."
+
+CMD_LIST_CATACOMB_NAME = "list"
+CMD_LIST_CATACOMB_DESC = "Lists the tombs currently available in the catacomb."
 
 CMD_OPEN_NAME = "open"
 CMD_OPEN_DESC = "Opens an existing tomb."
@@ -63,6 +68,7 @@ CMD_RM_OK = "Successfully removed the command with alias '{0}' from the tomb."
 WARN_ACTION_ABORTED = "The action was aborted."
 WARN_CMD_NOT_FOUND = (
     "The alias '{0}' doesn't correspond to any of the contents in this tomb.")
+WARN_EMPTY_CATACOMB = "Nothing but empty rooms and dirt..."
 WARN_EMPTY_TOMB = "Nothing but crumbled bones and dust..."
 WARN_TOMB_EXISTS = "The tomb with alias '{0}' already exists."
 WARN_TOMB_NOT_FOUND = (

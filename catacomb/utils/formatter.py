@@ -41,23 +41,16 @@ def to_table(headers, rows):
     return AsciiTable(table).table
 
 
-def create_row(alias, command, description):
-    """Creats a new table row using the provided attributes for a specific
-    command.
+def create_row(*args):
+    """Creates a new table row.
 
     Arguments:
-        alias (str): An alias that the command is referenced by.
-        command (str): The command that is stored.
-        description (str): A description of the command stored.
+        *args (list): Elements of the new row.
 
     Returns:
         A `list` representing the new row for a command.
     """
-    return [
-        textwrap.fill(alias, constants.TABLE_MAX_WIDTH),
-        textwrap.fill(command, constants.TABLE_MAX_WIDTH),
-        textwrap.fill(description, constants.TABLE_MAX_WIDTH),
-    ]
+    return [textwrap.fill(e, constants.TABLE_COL_MAX_WIDTH) for e in args]
 
 
 def print_warning(message):

@@ -111,5 +111,5 @@ def tomb_to_table(ctx):
         rows.append(formatter.create_row(alias, cmd, desc))
 
     if len(rows):
-        return formatter.to_table(constants.TABLE_HEADERS, rows)
+        return formatter.to_table(constants.TABLE_HEADERS_CMD, rows)
     return None

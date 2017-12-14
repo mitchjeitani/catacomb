@@ -54,6 +54,19 @@ class TestCatacombHelp(object):
         # There aren't any subcommands for this command.
         assert "Commands:" not in result.output
 
+    def test_list_help_view(self, help_flag):
+        result = CliRunner().invoke(
+            entry_points.catacomb_entry, ["list", help_flag[0]])
+
+        assert result.exit_code == 0
+
+        # Correct description present.
+        assert constants.CMD_LIST_CATACOMB_DESC in result.output
+        assert "Usage:" in result.output
+        assert "Options:" in result.output
+        # There aren't any subcommands for this command.
+        assert "Commands:" not in result.output
+
     def test_open_help_view(self, help_flag):
         result = CliRunner().invoke(
             entry_points.catacomb_entry, ["open", help_flag[0]])
