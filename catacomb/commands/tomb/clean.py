@@ -16,7 +16,6 @@ def clean(ctx, force):
     confirms the action, the tomb will be reset to it's original empty state.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         force (bool): Option to disable prompting the user for confirmation.
     """
     if not force:

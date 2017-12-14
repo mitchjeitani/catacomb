@@ -9,7 +9,6 @@ def is_existing_tomb(ctx, tomb_name):
     """Checks if the tomb, specified by the given name, exists in the catacomb.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         tomb_name (str): The name of the tomb.
 
     Returns:
@@ -22,9 +21,6 @@ def is_existing_tomb(ctx, tomb_name):
 def get_current_tomb_name(ctx):
     """Retrieves the name of the current tomb.
 
-    Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
-
     Returns:
         The name of the current tomb as a `string`.
     """
@@ -35,15 +31,15 @@ def create_tomb(ctx, tomb_name, description):
     """Creates a new tomb with the provided tomb name.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         tomb_name (str): The name of the new tomb.
     """
     new_tomb_path = os.path.join(ctx.obj.catacomb_dir, tomb_name)
+    tomb_contents = settings.DEFAULT_TOMB_CONTENTS
+    tomb_contents["description"] = description
 
     with open(new_tomb_path, "w") as new_tomb:
         new_tomb.write(json.dumps(
-            settings.DEFAULT_TOMB_CONTENTS,
-            indent=constants.INDENT_NUM_SPACES))
+            tomb_contents, indent=constants.INDENT_NUM_SPACES))
 
 
 def open_tomb(ctx, tomb_name):
@@ -51,7 +47,6 @@ def open_tomb(ctx, tomb_name):
     the user.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         tomb_name (str): The name of the new tomb.
     """
     if is_existing_tomb(ctx, tomb_name):
@@ -64,7 +59,6 @@ def remove_tomb(ctx, tomb_name):
     """Removes a tomb from the catacomb.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         tomb_name (str): The name of the new tomb.
     """
     if is_existing_tomb(ctx, tomb_name):

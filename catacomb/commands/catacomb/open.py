@@ -17,7 +17,6 @@ def open(ctx, tomb_name, new):
     commands stored within it.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         tomb_name (str): The name/alias of the tomb.
         new (bool): If True, create a new tomb (if it doesn't exist) and then
             switch to it.

@@ -16,7 +16,6 @@ def bury(ctx, tomb_name, force):
     """Removes the specified tomb from the catacomb.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         tomb_name (str): The name/alias of the tomb.
         force (bool): Option to disable prompting the user for confirmation.
     """

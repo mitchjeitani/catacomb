@@ -13,7 +13,6 @@ def rm(ctx, alias):
     """Removes a command from the tomb.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         alias (str): The alias of the command to remove.
     """
     if tomb_handler.remove_command(ctx, alias):

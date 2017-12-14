@@ -23,9 +23,6 @@ class PluginLoader(click.MultiCommand):
         """Returns a list of subcommands that are present in the plugin
         directory.
 
-        Arguments:
-            ctx (click.Context): Holds the state relevant for script execution.
-
         Returns:
             A sorted list of subcommands.
         """
@@ -41,7 +38,6 @@ class PluginLoader(click.MultiCommand):
         if it exists or returns None.
 
         Arguments:
-            ctx (click.Context): Holds the state relevant for script execution.
             name (str): The name of command.
 
         Returns:

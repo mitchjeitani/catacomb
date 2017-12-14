@@ -14,7 +14,6 @@ def use(ctx, alias):
     """Retrieves a command from the tomb and executes it.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         alias (str): The alias of the command to execute.
     """
     cmd = tomb_handler.get_command(ctx, alias)

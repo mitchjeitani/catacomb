@@ -10,9 +10,6 @@ from catacomb.utils import formatter, tomb_handler
 @click.pass_context
 def list(ctx):
     """Lists all the commands in the current tomb.
-
-    Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
     """
     table = tomb_handler.tomb_to_table(ctx)
     if table is None:

@@ -7,9 +7,6 @@ from catacomb.utils import formatter
 def read_tomb_commands(ctx):
     """Reads the contents of a tomb.
 
-    Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
-
     Returns:
         A `dict` representing the contents of the tomb.
     """
@@ -23,7 +20,6 @@ def update_tomb_commands(ctx, cmds):
     """Replaces the current contents of the tomb with `cmds`.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         cmds (dict): The commands to store in the tomb.
     """
     with open(ctx.obj.open_tomb, "r") as f:
@@ -39,9 +35,6 @@ def update_tomb_commands(ctx, cmds):
 def clean_tomb(ctx):
     """Clears the entire contents of the tomb, resetting it to it's original
     state.
-
-    Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
     """
     update_tomb_commands(ctx, {})
 
@@ -50,7 +43,6 @@ def add_command(ctx, command, alias, description):
     """Adds a new command to the current tomb.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         command (str): The command to add.
         alias (str): The alias to save the command as.
         description (str): What the command does.
@@ -69,7 +61,6 @@ def get_command(ctx, alias):
     """Retrieves a command from the current tomb, using its alias.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         alias (str): The alias to save the command as.
 
     Returns:
@@ -86,7 +77,6 @@ def remove_command(ctx, alias):
     """Removes a command from the current tomb.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         alias (str): The alias to save the command as.
 
     Returns:
@@ -107,9 +97,6 @@ def remove_command(ctx, alias):
 def tomb_to_table(ctx):
     """Converts the current tomb to a table containing information about each
     command stored.
-
-    Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
 
     Returns:
         A `string` representation of the table.

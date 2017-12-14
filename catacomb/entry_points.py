@@ -19,9 +19,6 @@ def catacomb_entry(ctx):
 
     This entry point handles actions involving the operations that alter the
     state of the catacomb and tombs within it.
-
-    Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
     """
     pass
 
@@ -37,8 +34,5 @@ def tomb_entry(ctx):
 
     This entry point handles actions involving the contents of the current
     tomb.
-
-    Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
     """
     pass

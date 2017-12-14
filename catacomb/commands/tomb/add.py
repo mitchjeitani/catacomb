@@ -17,7 +17,6 @@ def add(ctx, alias, command):
     description of what the command does.
 
     Arguments:
-        ctx (click.Context): Holds the state relevant for script execution.
         alias (str): The alias of the command being added to the tomb.
         command (str): The command to add to the tomb.
     """
