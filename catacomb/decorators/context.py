@@ -3,6 +3,7 @@ import os
 
 from catacomb import settings
 from catacomb.common import constants
+from catacomb.utils import file_handler
 
 
 class Context(object):
@@ -17,6 +18,7 @@ class Context(object):
         catacomb_dir (str): Path to the catacomb directory that stores
             the contents of every tomb.
         open_tomb_name (str): The name of the currently open tomb.
+        open_tomb_dir (str): The path to the currently open tomb.
     """
 
     def __init__(self):
@@ -27,7 +29,7 @@ class Context(object):
         self.catacomb_dir = os.path.join(
             self.config_dir, settings.TOMB_DIR_NAME)
         self.open_tomb_name = settings.TOMB_DEFAULT_FILE_NAME
-        self._open_tomb_dir = os.path.join(
+        self.open_tomb_dir = os.path.join(
             self.catacomb_dir, self.open_tomb_name)
         self._init_catacomb()
 
@@ -44,44 +46,30 @@ class Context(object):
         # Initialise user configuration and other defaults if they don't
         # already exist.
         if not os.path.isfile(self.config_file_path):
-            with open(self.config_file_path, "w") as config:
-                config.write(json.dumps(
-                    settings.DEFAULT_CONFIG,
-                    indent=constants.INDENT_NUM_SPACES))
+            file_handler.create(self.config_file_path, settings.DEFAULT_CONFIG)
         else:
             # If configuration does exist, read which tomb we should be using.
-            with open(self.config_file_path, "r") as config:
-                json_data = json.load(config)
-                self.open_tomb_name = json_data["open_tomb_name"]
-                self._open_tomb_dir = os.path.join(
-                    self.catacomb_dir, self.open_tomb_name)
+            config = file_handler.read(self.config_file_path)
+            self.open_tomb_name = config["open_tomb_name"]
+            self.open_tomb_dir = os.path.join(
+                self.catacomb_dir, self.open_tomb_name)
 
         # Initialise a default tomb if no tomb currently exists.
-        if not os.path.isfile(self._open_tomb_dir):
-            with open(self._open_tomb_dir, "w") as default_tomb:
-                default_tomb.write(json.dumps(
-                    settings.DEFAULT_TOMB_CONTENTS,
-                    indent=constants.INDENT_NUM_SPACES))
+        if not os.path.isfile(self.open_tomb_dir):
+            file_handler.create(
+                self.open_tomb_dir, settings.DEFAULT_TOMB_CONTENTS)
 
-    @property
-    def open_tomb(self):
-        return self._open_tomb_dir
-
-    @open_tomb.setter
-    def open_tomb(self, tomb_name):
+    def set_open_tomb(self, tomb_name):
         """Sets the current open tomb path to that of the specified tomb.
 
         Arguments:
             tomb_name (str): The name of the tomb.
         """
         new_tomb_path = os.path.join(self.catacomb_dir, tomb_name)
+
         if os.path.isfile(new_tomb_path):
-            with open(self.config_file_path, "r") as config:
-                config_contents = json.load(config)
             # Update the name of the open tomb and write it to the config file.
-            config_contents["open_tomb_name"] = tomb_name
-            with open(self.config_file_path, "w") as config:
-                config.write(json.dumps(
-                    config_contents,
-                    indent=constants.INDENT_NUM_SPACES))
-            self._open_tomb_dir = new_tomb_path
+            config = file_handler.read(self.config_file_path)
+            config["open_tomb_name"] = tomb_name
+            file_handler.update(self.config_file_path, config)
+            self.open_tomb_dir = new_tomb_path

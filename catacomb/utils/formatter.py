@@ -19,9 +19,8 @@ def color_text(text, color):
         non-colored text if the color is not available.
     """
     try:
-        return click.style(text, fg=color)
+        text = click.style(text, fg=color)
     except TypeError:
-        # Invalid color specified.
         print_warning(errors.INVALID_COLOR.format(color))
     return text
 
@@ -53,13 +52,24 @@ def create_row(*args):
     return [textwrap.fill(e, constants.TABLE_COL_MAX_WIDTH) for e in args]
 
 
-def print_warning(message):
-    """Correctly styles and prints an error message to standard output.
+def exit(message):
+    """Correctly styles and prints an error message to standard output. Then
+    exits the application.
 
     Arguments:
         message (str): An error message.
     """
     click.echo(color_text(message, "red"), err=True)
+    exit(1)
+
+
+def print_warning(message):
+    """Correctly styles and prints a warning message to standard output.
+
+    Arguments:
+        message (str): A warning message.
+    """
+    click.echo(color_text(message, "red"))
 
 
 def print_success(message):

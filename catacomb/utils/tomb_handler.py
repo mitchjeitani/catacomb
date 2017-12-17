@@ -1,7 +1,7 @@
 import json
 
 from catacomb.common import constants
-from catacomb.utils import formatter
+from catacomb.utils import file_handler, formatter
 
 
 def read_tomb_commands(ctx):
@@ -10,10 +10,8 @@ def read_tomb_commands(ctx):
     Returns:
         A `dict` representing the contents of the tomb.
     """
-    with open(ctx.obj.open_tomb, "r") as f:
-        json_data = json.load(f)
-        tomb_data = json_data["commands"]
-    return tomb_data
+    tomb_data = file_handler.read(ctx.obj.open_tomb_dir)
+    return tomb_data["commands"]
 
 
 def update_tomb_commands(ctx, cmds):
@@ -22,14 +20,12 @@ def update_tomb_commands(ctx, cmds):
     Arguments:
         cmds (dict): The commands to store in the tomb.
     """
-    with open(ctx.obj.open_tomb, "r") as f:
-        # We need to preserve the tombs other attributes (e.g. description),
-        # and only need to write to "commands".
-        tomb_contents = json.load(f)
-        tomb_contents["commands"] = cmds
+    # We need to preserve the tombs other attributes (e.g. description), and
+    # only need to write to "commands".
+    tomb_contents = file_handler.read(ctx.obj.open_tomb_dir)
+    tomb_contents["commands"] = cmds
 
-    with open(ctx.obj.open_tomb, "w") as f:
-        f.write(json.dumps(tomb_contents, indent=constants.INDENT_NUM_SPACES))
+    file_handler.update(ctx.obj.open_tomb_dir, tomb_contents)
 
 
 def clean_tomb(ctx):
@@ -70,6 +66,7 @@ def get_command(ctx, alias):
 
     if alias in data:
         return data[alias]["command"]
+
     return None
 
 
@@ -112,4 +109,5 @@ def tomb_to_table(ctx):
 
     if len(rows):
         return formatter.to_table(constants.TABLE_HEADERS_CMD, rows)
+
     return None

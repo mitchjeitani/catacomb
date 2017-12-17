@@ -3,7 +3,7 @@ import os
 
 from catacomb import settings
 from catacomb.common import constants, errors
-from catacomb.utils import formatter
+from catacomb.utils import file_handler, formatter
 
 
 def is_existing_tomb(ctx, tomb_name):
@@ -43,8 +43,7 @@ def catacomb_to_table(ctx):
     # Open each tomb and grab the description.
     tombs = []
     for idx, path in enumerate(tomb_paths):
-        with open(path, "r") as tomb:
-            tomb = json.load(tomb)
+        tomb = file_handler.read(path)
         tombs.append((tomb_names[idx], tomb["description"]))
 
     # Construct a table row for each tomb.
@@ -55,6 +54,7 @@ def catacomb_to_table(ctx):
 
     if len(rows):
         return formatter.to_table(constants.TABLE_HEADERS_TOMB, rows)
+
     return None
 
 
@@ -65,12 +65,11 @@ def create_tomb(ctx, tomb_name, description):
         tomb_name (str): The name of the new tomb.
     """
     new_tomb_path = os.path.join(ctx.obj.catacomb_dir, tomb_name)
+
     tomb_contents = settings.DEFAULT_TOMB_CONTENTS
     tomb_contents["description"] = description
 
-    with open(new_tomb_path, "w") as new_tomb:
-        new_tomb.write(json.dumps(
-            tomb_contents, indent=constants.INDENT_NUM_SPACES))
+    file_handler.create(new_tomb_path, tomb_contents)
 
 
 def open_tomb(ctx, tomb_name):
@@ -81,10 +80,9 @@ def open_tomb(ctx, tomb_name):
         tomb_name (str): The name of the new tomb.
     """
     if is_existing_tomb(ctx, tomb_name):
-        ctx.obj.open_tomb = tomb_name
+        ctx.obj.set_open_tomb(tomb_name)
     else:
-        formatter.print_warning(errors.OPEN_UNKNOWN_TOMB.format(tomb_name))
-        exit(1)
+        formatter.exit(errors.TOMB_OPEN_UNKNOWN.format(tomb_name))
 
 
 def remove_tomb(ctx, tomb_name):
@@ -96,5 +94,4 @@ def remove_tomb(ctx, tomb_name):
     if is_existing_tomb(ctx, tomb_name):
         os.remove(os.path.join(ctx.obj.catacomb_dir, tomb_name))
     else:
-        formatter.print_warning(errors.BURY_UNKNOWN_TOMB.format(tomb_name))
-        exit(1)
+        formatter.exit(errors.TOMB_BURY_UNKNOWN.format(tomb_name))
