@@ -80,6 +80,19 @@ class TestTombHelp(object):
         # There aren't any subcommands for this command.
         assert "Commands:" not in result.output
 
+    def test_status_help_view(self, help_flag):
+        result = CliRunner().invoke(
+            entry_points.tomb_entry, ["status", help_flag[0]])
+
+        assert result.exit_code == 0
+
+        # Correct description present.
+        assert constants.CMD_STATUS_DESC in result.output
+        assert "Usage:" in result.output
+        assert "Options:" in result.output
+        # There aren't any subcommands for this command.
+        assert "Commands:" not in result.output
+
     def test_use_help_view(self, help_flag):
         result = CliRunner().invoke(
             entry_points.tomb_entry, ["use", help_flag[0]])

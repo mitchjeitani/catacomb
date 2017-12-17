@@ -54,6 +54,11 @@ CMD_CLEAN_PROMPT = (
     "You're about to completely destroy the contents of this "
     "tomb. Would you like to continue? (Y/n)")
 
+CMD_STATUS_NAME = "status"
+CMD_STATUS_DESC = "Shows the current tombs status."
+CMD_STATUS_OK = (
+    "You're currently using tomb '{0}', which contains {1} different commands.")
+
 CMD_USE_NAME = "use"
 CMD_USE_DESC = "Grabs a command from the tomb and executes it."
 

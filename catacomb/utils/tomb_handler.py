@@ -5,17 +5,17 @@ from catacomb.utils import file_handler, formatter
 
 
 def read_tomb_commands(ctx):
-    """Reads the contents of a tomb.
+    """Gets the commands currently present in the tomb.
 
     Returns:
-        A `dict` representing the contents of the tomb.
+        A `dict` representing the commands in the tomb.
     """
     tomb_data = file_handler.read(ctx.obj.open_tomb_dir)
     return tomb_data["commands"]
 
 
 def update_tomb_commands(ctx, cmds):
-    """Replaces the current contents of the tomb with `cmds`.
+    """Replaces the current commands in the tomb with `cmds`.
 
     Arguments:
         cmds (dict): The commands to store in the tomb.
@@ -29,8 +29,8 @@ def update_tomb_commands(ctx, cmds):
 
 
 def clean_tomb(ctx):
-    """Clears the entire contents of the tomb, resetting it to it's original
-    state.
+    """Clears the commands currently present in the tomb, resetting it to it's
+    original (empty) state.
     """
     update_tomb_commands(ctx, {})
 
@@ -89,6 +89,15 @@ def remove_command(ctx, alias):
     update_tomb_commands(ctx, data)
 
     return True
+
+
+def get_num_commands(ctx):
+    """Counts the number of commands present in the current tomb.
+
+    Returns:
+        An `int`, representing the number of commands present in the tomb.
+    """
+    return len(read_tomb_commands(ctx))
 
 
 def tomb_to_table(ctx):
