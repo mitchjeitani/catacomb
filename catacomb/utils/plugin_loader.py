@@ -27,9 +27,11 @@ class PluginLoader(click.MultiCommand):
             A sorted list of subcommands.
         """
         commands = []
+
         for filename in os.listdir(self._plugin_dir):
             if filename.endswith(".py") and "__" not in filename:
                 commands.append(filename[:-3])
+
         commands.sort()
         return commands
 
@@ -45,7 +47,12 @@ class PluginLoader(click.MultiCommand):
         """
         namespace = {}
         plugin = os.path.join(self._plugin_dir, name + ".py")
+
+        if not os.path.exists(plugin):
+            return None
+
         with open(plugin) as f:
             code = compile(f.read(), plugin, "exec")
             eval(code, namespace, namespace)
+
         return namespace[name]
