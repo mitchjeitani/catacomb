@@ -20,7 +20,7 @@ Two entry points are used to separate organisation of tombs and their contents. 
 ```
 Usage: catacomb [OPTIONS] COMMAND [ARGS]...
 
-  A minimalistic CLI tool for storing shell commands.
+  For handling the tombs within your catacomb.
 
 Options:
   -h, --help  Show this message and exit.
@@ -37,7 +37,7 @@ The `tomb` entry point provides commands to deal with the contents of a single t
 ```
 Usage: tomb [OPTIONS] COMMAND [ARGS]...
 
-  A minimalistic CLI tool for storing shell commands.
+  For handling the contents within a tomb.
 
 Options:
   -h, --help  Show this message and exit.
@@ -50,3 +50,10 @@ Commands:
   status  Shows the current tombs status.
   use     Grabs a command from the tomb and executes it.
 ```
+
+### Examples
+
+Detailed usage has been documented for each command and can be viewed at the following directories:
+
+* [Examples](examples/catacomb) for the `catacomb` entry point
+* [Examples](examples/tomb) for the `tomb` entry point

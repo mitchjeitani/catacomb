@@ -1,3 +1,7 @@
+# Entry points.
+DESC_CATACOMB = "For handling the tombs within your catacomb."
+DESC_TOMB = "For handling the contents within a tomb."
+
 # Misc values.
 INDENT_NUM_SPACES = 2
 
@@ -57,7 +61,7 @@ CMD_CLEAN_PROMPT = (
 CMD_STATUS_NAME = "status"
 CMD_STATUS_DESC = "Shows the current tombs status."
 CMD_STATUS_OK = (
-    "You're currently using tomb '{0}', which contains {1} different commands.")
+    "You're currently using tomb '{0}', which contains {1} commands.")
 
 CMD_USE_NAME = "use"
 CMD_USE_DESC = "Grabs a command from the tomb and executes it."

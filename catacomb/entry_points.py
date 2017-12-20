@@ -1,7 +1,7 @@
 import click
 
 from catacomb import settings
-from catacomb.common import about
+from catacomb.common import constants
 from catacomb.decorators.context import Context
 from catacomb.utils.plugin_loader import PluginLoader
 
@@ -9,7 +9,7 @@ pass_context = click.make_pass_decorator(Context, ensure=True)
 
 
 @click.group(
-    context_settings=settings.CONTEXT_SETTINGS, help=about.description,
+    context_settings=settings.CONTEXT_SETTINGS, help=constants.DESC_CATACOMB,
     cls=PluginLoader)
 @pass_context
 def catacomb_entry(ctx):
@@ -24,7 +24,7 @@ def catacomb_entry(ctx):
 
 
 @click.group(
-    context_settings=settings.CONTEXT_SETTINGS, help=about.description,
+    context_settings=settings.CONTEXT_SETTINGS, help=constants.DESC_TOMB,
     cls=PluginLoader)
 @pass_context
 def tomb_entry(ctx):

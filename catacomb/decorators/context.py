@@ -40,6 +40,7 @@ class Context(object):
         # don't already exist.
         if not os.path.exists(self.config_dir):
             os.makedirs(self.config_dir)
+
         if not os.path.exists(self.catacomb_dir):
             os.makedirs(self.catacomb_dir)
 

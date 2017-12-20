@@ -8,7 +8,7 @@ from catacomb.utils import formatter, tomb_handler
     constants.CMD_ADD_NAME, help=constants.CMD_ADD_DESC,
     short_help=constants.CMD_ADD_DESC)
 @click.argument("alias", nargs=1)
-@click.argument("command", nargs=-1, required=False)
+@click.argument("command", nargs=1, required=False)
 @click.pass_context
 def add(ctx, alias, command):
     """Adds a new command to the tomb.
@@ -34,10 +34,7 @@ def add(ctx, alias, command):
         # If the `command` hasn't yet been specified we'll need to prompt the
         # user for that as well.
         command = click.prompt(constants.CMD_ADD_CMD_PROMPT)
-    else:
-        # The argument `command` is passed as a tuple, so we'll need to convert
-        # it to a string in order to evaluate it later.
-        command = " ".join(command)
+
     description = click.prompt(constants.CMD_ADD_DESC_PROMPT)
 
     # Save the new command to the current tomb.
