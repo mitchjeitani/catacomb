@@ -5,17 +5,19 @@
 
 > A minimalistic CLI tool for storing shell commands.
 
+![](./media/catacomb-demo.gif)
+
 Remembering useful commands is difficult, and typing out long commands is frustrating. Relieve these pain points with catacomb, a simple CLI tool for storing, retrieving and executing commands. Just type out the command once, and then execute it through catacomb, with an alias of your choice.
 
 ### Setup
 
 ```
-$ pip install catacomb
+$ pip3 install catacomb
 ```
 
 ### Usage
 
-Two entry points are used to separate organisation of tombs and their contents. The `catacomb` entry point provides commands to deal with organisation of tombs within the catacomb.
+Two entry points are used to separate organisation of tombs and their contents. The `catacomb` entry point provides commands to deal with organisation of tombs within the catacomb. Having seperate tombs for seperate projects, as an example, would allow isolated environments - so that you're not forced to come up with new aliases that execute different commands for different projects.
 
 ```
 Usage: catacomb [OPTIONS] COMMAND [ARGS]...
@@ -32,7 +34,7 @@ Commands:
   open    Opens an existing tomb.
 ```
 
-The `tomb` entry point provides commands to deal with the contents of a single tomb.
+The `tomb` entry point provides commands to deal with the contents of a single tomb. Tombs act as a store for all your commands, allowing you to use and manage them by simply specifying the alias.
 
 ```
 Usage: tomb [OPTIONS] COMMAND [ARGS]...
