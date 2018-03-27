@@ -1,4 +1,5 @@
 import click
+import sys
 import textwrap
 
 from catacomb.common import constants, errors
@@ -60,7 +61,7 @@ def exit(message):
         message (str): An error message.
     """
     click.echo(color_text(message, "red"), err=True)
-    exit(1)
+    sys.exit(1)
 
 
 def print_warning(message):
