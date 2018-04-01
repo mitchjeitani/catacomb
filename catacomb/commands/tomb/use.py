@@ -31,6 +31,7 @@ def use(ctx, alias, params):
         # The command alias doesn't exist.
         formatter.print_warning(constants.WARN_CMD_NOT_FOUND.format(alias))
 
+
 def format_cmd(cmd, params):
     """Formats a command with user provided parameters, similar to the Python
     `format()` method.
@@ -50,10 +51,27 @@ def format_cmd(cmd, params):
         return cmd.format(*params)
     except IndexError:
         # Not all the placeholders are provided with a value.
-        formatter.exit(constants.WARN_FMT_NUM_PARAMS)
+        formatter.exit(constants.WARN_FMT_NUM_PARAMS.format(
+            len(params), num_parameters(cmd)))
     except KeyError:
         # Placeholders aren't following the correct syntax.
         formatter.exit(constants.WARN_FMT_PLACEHOLDER_SYNTAX)
-    except:
+    except ValueError:
+        # TODO: {} {0} {} {1}
+        pass
+    except Exception:
         # This shouldn't be reachable, but just in case, we'll report it.
         formatter.exit(errors.INVALID_FORMAT_USE_CMD.format(cmd))
+
+
+def num_parameters(cmd):
+    """Retrieves the number of placeholders in a command.
+
+    Arguments:
+        cmd (str): The command.
+
+    Returns:
+        An `int` representing the number of placeholders in the command.
+    """
+    # TODO
+    return 0
