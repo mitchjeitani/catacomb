@@ -83,8 +83,11 @@ WARN_TOMB_EXISTS = "The tomb with alias '{0}' already exists."
 WARN_TOMB_NOT_FOUND = (
     "The alias '{0}' doesn't correspond to any of the tombs in the catacomb.")
 WARN_FMT_NUM_PARAMS = (
-    "{0} parameters were provided, but we needed at least {1}.")
+    "Not enough parameters to use '{0}', {1} were provided.")
 WARN_FMT_PLACEHOLDER_SYNTAX = (
     "The placeholders in this command don't adhere to the correct syntax. "
     "Please either use empty curly brackets '{}' or specify the index with "
     "a number, e.g. '{0} {1} {2}'.")
+WARN_FMT_PLACEHOLDER_SYNTAX2 = (
+    "There are both types of placeholders in this command, '{}' and "
+    "'{[0-9]+}'. Commands should use only one type.")
