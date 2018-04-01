@@ -59,3 +59,9 @@ Detailed usage has been documented for each command and can be viewed at the fol
 
 * [Examples](examples/catacomb) for the `catacomb` entry point
 * [Examples](examples/tomb) for the `tomb` entry point
+
+### Contributing
+
+This project is still in its infancy, so feel free to contribute by reporting issues or suggesting some new features. Pull requests are definitely welcomed!
+
+Please be sure that any contributions follow [PEP8](https://www.python.org/dev/peps/pep-0008/) standards.
