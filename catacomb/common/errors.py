@@ -1,5 +1,9 @@
 # General application errors.
 INVALID_COLOR = "Error 100: The desired color is not available, '{0}'."
+INVALID_FORMAT_USE_CMD = (
+    "Error 101: A formatting error occured and we're not sure why. Please "
+    "report this at https://github.com/mitchjeitani/catacomb.\nCommand used "
+    "was: {0}.")
 
 # Catacomb handling errors.
 TOMB_OPEN_UNKNOWN = (
