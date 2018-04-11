@@ -20,15 +20,14 @@ def add(ctx, alias, command):
         alias (str): The alias of the command being added to the tomb.
         command (str): The command to add to the tomb.
     """
-    if tomb_handler.get_command(ctx, alias):
+    if tomb_handler.is_existing_command(ctx, alias):
         # If the `alias` specified is already used for a command in the tomb,
         # prompt the user to determine if they want to overwrite the old
         # command.
         update = click.prompt(constants.CMD_ADD_UPDATE_PROMPT.format(alias))
         if update.lower() != "y":
             # Abort the action.
-            formatter.print_warning(constants.WARN_ACTION_ABORTED)
-            return
+            formatter.exit(constants.WARN_ACTION_ABORTED)
 
     if not command:
         # If the `command` hasn't yet been specified we'll need to prompt the

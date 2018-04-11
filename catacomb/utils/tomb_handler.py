@@ -35,6 +35,17 @@ def clean_tomb(ctx):
     update_tomb_commands(ctx, {})
 
 
+def is_existing_command(ctx, alias):
+    """Checks if a command belonging to the given alias exists in the active
+    tomb.
+
+    Arguments:
+        alias (str): The command alias.
+    """
+    data = read_tomb_commands(ctx)
+    return alias in data
+
+
 def add_command(ctx, command, alias, description):
     """Adds a new command to the current tomb.
 
@@ -53,18 +64,22 @@ def add_command(ctx, command, alias, description):
     update_tomb_commands(ctx, data)
 
 
-def get_command(ctx, alias):
+def get_command(ctx, alias, desc=False):
     """Retrieves a command from the current tomb, using its alias.
 
     Arguments:
         alias (str): The alias to save the command as.
+        desc (bool): If True, return the description as well (default: False).
 
     Returns:
-        The command as a `string`, or None if not found.
+        The command as a `string`, or a `tuple` containing the command and
+        description if desc is True, or None if not found.
     """
     data = read_tomb_commands(ctx)
 
     if alias in data:
+        if desc:
+            return (data[alias]["command"], data[alias]["description"])
         return data[alias]["command"]
 
     return None

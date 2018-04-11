@@ -10,6 +10,8 @@ DEFAULT_CONFIG = {
     "open_tomb_name": TOMB_DEFAULT_FILE_NAME
 }
 
+DEFAULT_EDITOR = "vim"
+
 DEFAULT_TOMB_CONTENTS = {
     "commands": {},
     "description": "-"
