@@ -58,6 +58,28 @@ CMD_CLEAN_PROMPT = (
     "You're about to completely destroy the contents of this "
     "tomb. Would you like to continue? (Y/n)")
 
+CMD_EDIT_NAME = "edit"
+CMD_EDIT_DESC = "Opens an editor to alter a command that's in the tomb."
+CMD_EDIT_OK = "The command was successfully updated."
+CMD_EDIT_OVERWRITE_PROMPT = (
+    "The alias '{0}' is already being used in this tomb. Would "
+    "you like to overwrite it? (Y/n)")
+CMD_EDIT_INIT_MSG = (
+    "# You are currently editing '{0}'. Only edit text on the right hand\n"
+    "# side of the equals sign, and keep entries on the same line.\n\n"
+    "ALIAS = {0}\n\n"
+    "COMMAND = {1}\n\n"
+    "DESCRIPTION = {2}\n\n"
+    "# End of file.\n")
+CMD_EDIT_MISSING_KEY = (
+    "The entry for '{0}' seems to have been corrupted. Don't remove any lines "
+    "and only edit text on the right hand side of the equals sign. Please try "
+    "again.")
+CMD_EDIT_MISSING_KEYS = (
+    "Oops, we found an unexpected number of entries. 3 expected, {0} were "
+    "found. Please try again.")
+CMD_EDIT_MISSING_VAL = ("A value for '{0}' was not entered, please try again.")
+
 CMD_STATUS_NAME = "status"
 CMD_STATUS_DESC = "Shows the current tombs status."
 CMD_STATUS_OK = (
@@ -76,7 +98,7 @@ CMD_RM_OK = "Successfully removed the command with alias '{0}' from the tomb."
 # General command related warnings.
 WARN_ACTION_ABORTED = "The action was aborted."
 WARN_CMD_NOT_FOUND = (
-    "The alias '{0}' doesn't correspond to any of the contents in this tomb.")
+    "The alias '{0}' doesn't correspond to any of the commands in this tomb.")
 WARN_EMPTY_CATACOMB = "Nothing but empty rooms and dirt..."
 WARN_EMPTY_TOMB = "Nothing but crumbled bones and dust..."
 WARN_TOMB_EXISTS = "The tomb with alias '{0}' already exists."
