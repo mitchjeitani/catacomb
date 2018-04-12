@@ -4,7 +4,7 @@ import click
 
 from catacomb import settings
 from catacomb.common import constants
-from catacomb.utils import formatter, tomb_handler
+from catacomb.utils import formatter, helpers, tomb_handler
 
 from subprocess import call
 
@@ -24,7 +24,7 @@ def edit(ctx, alias):
         alias (str): The alias of the command to edit.
     """
     if not tomb_handler.is_existing_command(ctx, alias):
-        formatter.exit(constants.WARN_CMD_NOT_FOUND.format(alias))
+        helpers.exit(constants.WARN_CMD_NOT_FOUND.format(alias))
 
     editor = os.environ.get("EDITOR", settings.DEFAULT_EDITOR)
     cmd_info = tomb_handler.get_command(ctx, alias, True)
@@ -52,7 +52,7 @@ def edit(ctx, alias):
 
         if update.lower() != "y":
             # Abort the action.
-            formatter.exit(constants.WARN_ACTION_ABORTED)
+            helpers.exit(constants.WARN_ACTION_ABORTED)
         else:
             # We need to remove the old command if we're not overwriting it.
             tomb_handler.remove_command(ctx, alias)
@@ -88,7 +88,7 @@ def read_edits(f):
     # proper error message.
     err_message = validate_edits(d)
     if err_message:
-        formatter.exit(err_message)
+        helpers.exit(err_message)
 
     return d
 

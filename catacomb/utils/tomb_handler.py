@@ -41,6 +41,9 @@ def is_existing_command(ctx, alias):
 
     Arguments:
         alias (str): The command alias.
+
+    Returns:
+        A `bool`.
     """
     data = read_tomb_commands(ctx)
     return alias in data

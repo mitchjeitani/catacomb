@@ -3,7 +3,7 @@ import os
 
 from catacomb import settings
 from catacomb.common import constants, errors
-from catacomb.utils import file_handler, formatter
+from catacomb.utils import file_handler, formatter, helpers
 
 
 def is_existing_tomb(ctx, tomb_name):
@@ -82,7 +82,7 @@ def open_tomb(ctx, tomb_name):
     if is_existing_tomb(ctx, tomb_name):
         ctx.obj.set_open_tomb(tomb_name)
     else:
-        formatter.exit(errors.TOMB_OPEN_UNKNOWN.format(tomb_name))
+        helpers.exit(errors.TOMB_OPEN_UNKNOWN.format(tomb_name))
 
 
 def remove_tomb(ctx, tomb_name):
@@ -94,4 +94,4 @@ def remove_tomb(ctx, tomb_name):
     if is_existing_tomb(ctx, tomb_name):
         os.remove(os.path.join(ctx.obj.catacomb_dir, tomb_name))
     else:
-        formatter.exit(errors.TOMB_BURY_UNKNOWN.format(tomb_name))
+        helpers.exit(errors.TOMB_BURY_UNKNOWN.format(tomb_name))
