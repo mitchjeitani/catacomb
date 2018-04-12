@@ -2,7 +2,7 @@ import click
 import os
 
 from catacomb.common import constants, errors
-from catacomb.utils import formatter, tomb_handler
+from catacomb.utils import formatter, helpers, tomb_handler
 
 
 @click.command(
@@ -51,14 +51,14 @@ def format_cmd(alias, cmd, params):
         return cmd.format(*params)
     except IndexError:
         # Not all the placeholders are provided with a value.
-        formatter.exit(constants.WARN_FMT_NUM_PARAMS.format(
+        helpers.exit(constants.WARN_FMT_NUM_PARAMS.format(
             alias, len(params)))
     except KeyError:
         # Placeholders aren't following the correct syntax.
-        formatter.exit(constants.WARN_FMT_PLACEHOLDER_SYNTAX)
+        helpers.exit(constants.WARN_FMT_PLACEHOLDER_SYNTAX)
     except ValueError:
         # Inconsistent use of placeholders in a command.
-        formatter.exit(constants.WARN_FMT_PLACEHOLDER_SYNTAX2)
+        helpers.exit(constants.WARN_FMT_PLACEHOLDER_SYNTAX2)
     except Exception:
         # This shouldn't be reachable, but just in case, we'll report it.
-        formatter.exit(errors.INVALID_FORMAT_USE_CMD.format(cmd))
+        helpers.exit(errors.INVALID_FORMAT_USE_CMD.format(cmd))

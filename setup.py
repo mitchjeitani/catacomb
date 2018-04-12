@@ -28,7 +28,7 @@ setup(
 
     # Metadata
     author = "Mitchell Jeitani",
-    author_email = "mitchelljeitani@hotmail.com",
+    author_email = "mitchelljeitani@gmail.com",
     description = about.description,
     license = "MIT",
     keywords = "command-line shell productivity storage",

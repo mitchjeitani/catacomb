@@ -64,6 +64,15 @@ def exit(message):
     sys.exit(1)
 
 
+def print_error(message):
+    """Correctly styles and prints an error message to standard output.
+
+    Arguments:
+        message (str): An error message.
+    """
+    click.echo(color_text(message, "red"), err=True)
+
+
 def print_warning(message):
     """Correctly styles and prints a warning message to standard output.
 
