@@ -1,6 +1,10 @@
 # Entry points.
-DESC_CATACOMB = "For handling the tombs within your catacomb."
-DESC_TOMB = "For handling the contents within a tomb."
+DESC_CATACOMB = (
+    "For handling the tombs within your catacomb. Add the flags -h or --help "
+    "to any of the commands for more information, e.g. catacomb COMMAND -h.")
+DESC_TOMB = (
+    "For handling the contents within a tomb. Add the flags -h or --help "
+    "to any of the commands for more information, e.g. tomb COMMAND -h.")
 
 # Misc values.
 INDENT_NUM_SPACES = 2
@@ -51,7 +55,7 @@ CMD_ADD_UPDATE_PROMPT = (
     "you like to overwrite it? (Y/n)")
 
 CMD_CLEAN_NAME = "clean"
-CMD_CLEAN_DESC = "Empties the contents of a tomb."
+CMD_CLEAN_DESC = "Obliterates the contents of the active tomb."
 CMD_CLEAN_OK = "The contents of the tomb have been cleared."
 CMD_CLEAN_FORCE_DESC = "Ignore the prompt for user confirmation."
 CMD_CLEAN_PROMPT = (
@@ -59,7 +63,9 @@ CMD_CLEAN_PROMPT = (
     "tomb. Would you like to continue? (Y/n)")
 
 CMD_EDIT_NAME = "edit"
-CMD_EDIT_DESC = "Opens an editor to alter a command that's in the tomb."
+CMD_EDIT_DESC = (
+    "Opens an editor to edit a command that's already stored in "
+    "the active tomb.")
 CMD_EDIT_OK = "The command was successfully updated."
 CMD_EDIT_OVERWRITE_PROMPT = (
     "The alias '{0}' is already being used in this tomb. Would "
@@ -81,15 +87,15 @@ CMD_EDIT_MISSING_KEYS = (
 CMD_EDIT_MISSING_VAL = ("A value for '{0}' was not entered, please try again.")
 
 CMD_STATUS_NAME = "status"
-CMD_STATUS_DESC = "Shows the current tombs status."
+CMD_STATUS_DESC = "Shows some general information about the active tomb."
 CMD_STATUS_OK = (
     "You're currently using tomb '{0}', which contains {1} commands.")
 
 CMD_USE_NAME = "use"
-CMD_USE_DESC = "Grabs a command from the tomb and executes it."
+CMD_USE_DESC = "Executes a command, specified by its alias."
 
 CMD_LIST_NAME = "list"
-CMD_LIST_DESC = "Lists the commands currently stored in the tomb."
+CMD_LIST_DESC = "Displays all the commands available in the active tomb."
 
 CMD_RM_NAME = "rm"
 CMD_RM_DESC = "Removes a command from the tomb."
