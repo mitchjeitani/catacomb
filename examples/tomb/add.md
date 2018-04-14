@@ -1,9 +1,10 @@
 ### Usage
 
 ```
-Usage: tomb add [OPTIONS] ALIAS [COMMAND]
+Usage: tomb edit [OPTIONS] ALIAS
 
-  Stores a new command in the tomb.
+  Opens an editor to edit a command that's already stored in the active
+  tomb.
 
 Options:
   -h, --help  Show this message and exit.
@@ -12,14 +13,8 @@ Options:
 ### Examples
 
 ```
-$ tomb add pipify
-Command: pip3 install -r requirements.txt
-Description: Install python packages from the requirements file.
+$ tomb edit pipify
 ```
 
-Or include the command in the same line:
-
-```
-$ tomb add pipify "pip3 install -r requirements.txt"
-Description: Install python packages from the requirements file.
-```
+A editor will appear, allowing you to make changes to the commands alias,
+command and description. Be sure to follow the instructions in the file.

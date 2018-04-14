@@ -22,7 +22,8 @@ Two entry points are used to separate organisation of tombs and their contents. 
 ```
 Usage: catacomb [OPTIONS] COMMAND [ARGS]...
 
-  For handling the tombs within your catacomb.
+  For handling the tombs within your catacomb. Add the flags -h or --help to
+  any of the commands for more information, e.g. catacomb COMMAND -h.
 
 Options:
   -h, --help  Show this message and exit.
@@ -39,18 +40,21 @@ The `tomb` entry point provides commands to deal with the contents of a single t
 ```
 Usage: tomb [OPTIONS] COMMAND [ARGS]...
 
-  For handling the contents within a tomb.
+  For handling the contents within a tomb. Add the flags -h or --help to any
+  of the commands for more information, e.g. tomb COMMAND -h.
 
 Options:
   -h, --help  Show this message and exit.
 
 Commands:
   add     Stores a new command in the tomb.
-  clean   Empties the contents of a tomb.
-  list    Lists the commands currently stored in the tomb.
+  clean   Obliterates the contents of the active tomb.
+  edit    Opens an editor to edit a command that's already stored in the
+          active tomb.
+  list    Displays all the commands available in the active tomb.
   rm      Removes a command from the tomb.
-  status  Shows the current tombs status.
-  use     Grabs a command from the tomb and executes it.
+  status  Shows some general information about the active tomb.
+  use     Executes a command, specified by its alias.
 ```
 
 ### Examples
