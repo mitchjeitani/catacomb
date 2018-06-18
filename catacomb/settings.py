@@ -10,7 +10,9 @@ DEFAULT_CONFIG = {
     "open_tomb_name": TOMB_DEFAULT_FILE_NAME
 }
 
-DEFAULT_EDITOR = "vim"
+DEFAULT_EDITOR_UNIX = "vi"
+DEFAULT_EDITOR_WIN32 = "edit"
+DEFAULT_EDITOR_WIN64 = "notepad"
 
 DEFAULT_TOMB_CONTENTS = {
     "commands": {},
