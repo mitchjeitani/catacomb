@@ -1,8 +1,6 @@
-import os
-import tempfile
 import click
+import os
 
-from catacomb import settings
 from catacomb.common import constants
 from catacomb.utils import formatter, helpers, tomb_handler
 
@@ -26,23 +24,26 @@ def edit(ctx, alias):
     if not tomb_handler.is_existing_command(ctx, alias):
         helpers.exit(constants.WARN_CMD_NOT_FOUND.format(alias))
 
-    editor = os.environ.get("EDITOR", settings.DEFAULT_EDITOR)
+    editor = os.environ.get("EDITOR", helpers.default_editor())
     cmd_info = tomb_handler.get_command(ctx, alias, True)
+    fname = helpers.random_fname()
 
     # Creates a temporary file with the current command information, allowing
     # edits.
-    with tempfile.NamedTemporaryFile("r+", suffix=".tmp") as temp_file:
+    with open(fname, "w") as temp_file:
         # Append the initial message to the file.
         temp_file.write(constants.CMD_EDIT_INIT_MSG.format(
             alias, cmd_info[0], cmd_info[1]))
-        temp_file.flush()
 
-        # Open the file within an editor.
-        call([editor, temp_file.name])
+    # Open the file within an editor.
+    call([editor, temp_file.name])
 
-        # Read changes to the file after the user is done with it.
-        temp_file.seek(0)
+    # Reads the changes to the file after the user is done with it.
+    with open(fname, "r") as temp_file:
         edits = read_edits(temp_file)
+
+    # Clean up.
+    os.remove(fname)
 
     # The edited alias already exists in the active tomb.
     if edits["alias"] != alias and tomb_handler.is_existing_command(
