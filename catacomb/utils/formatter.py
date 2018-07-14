@@ -53,17 +53,6 @@ def create_row(*args):
     return [textwrap.fill(e, constants.TABLE_COL_MAX_WIDTH) for e in args]
 
 
-def exit(message):
-    """Correctly styles and prints an error message to standard output. Then
-    exits the application.
-
-    Arguments:
-        message (str): An error message.
-    """
-    click.echo(color_text(message, "red"), err=True)
-    sys.exit(1)
-
-
 def print_error(message):
     """Correctly styles and prints an error message to standard output.
 
